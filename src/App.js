@@ -1,9 +1,10 @@
 //import React from 'react';
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
-import HeaderBar from './HeaderBar.js'
-import Carrousel from './Carrousel.js'
-import './App.css'; 
+import HeaderBar from './HeaderBar.js';
+import Carrousel from './Carrousel.js';
+import Docbtn from './DocumentBtn.js';
+import './App.css';
 
 /*class Text extends Component{
   render(){
@@ -23,10 +24,26 @@ import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <HeaderBar></HeaderBar>
-      <Carrousel></Carrousel>
-    </div>
+    <view style={{ flex: 1 }}>
+      <div className='App'>
+        <HeaderBar></HeaderBar>
+        <Carrousel></Carrousel>
+      </div>
+      <div className= 'ButtonContainer'>
+        <div className='Documents'>
+          <Docbtn></Docbtn>
+        </div>
+        <div className='QA'>
+          <Docbtn></Docbtn>
+        </div>
+        <div className='Issues'>
+          <Docbtn></Docbtn>
+        </div>
+        <div className='New'>
+          <Docbtn></Docbtn>
+        </div>
+      </div>
+    </view>
   );
 }
 
@@ -36,13 +53,13 @@ export default App;
 /*class Hello extends Component{
   render(){
     return <h1>{this.props.title}</h1>
-  
+
   }
 }*/
 
 /*va adentro del div de abajo
- <Text arrayofNumbers={[2,4,5,78]} 
-              number="200" 
+ <Text arrayofNumbers={[2,4,5,78]}
+              number="200"
               text='kadksjda'
               objectValues = {{key1:'carla grosa', key2:'carla no grosa'}}>
         </Text>*/

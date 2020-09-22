@@ -40,3 +40,55 @@
     transform: rotate(360deg);
   }
 }
+
+.ButtonContainer{
+  overflow: hidden;
+}
+.Documents {
+  background-color: #ffffff;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: initial;
+  float: left;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-left: 20%;
+  margin-top: 3%;
+}
+.QA {
+  background-color: #ffffff;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: row;
+  float: left;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-left: 6%;
+  margin-top: 3%;
+}
+.Issues {
+  background-color: #ffffff;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: initial;
+  float: left;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-left: 8%;
+  margin-top: 3%;
+}
+.New {
+  background-color: #ffffff;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: row;
+  float: right;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-right: 20%;
+  margin-top: 3%;
+}
