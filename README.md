@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -70,3 +71,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 =======
 # ERP-Foro
 >>>>>>> c56c7437e9e07e8104afcdc60dc6acfe44584aa3
+=======
+# ERP-Foro
+>>>>>>> ed7c015aef1025f2dd2008fe65b515e8173a1221
