@@ -1,6 +1,8 @@
 //import React from 'react';
 import React, { Component } from 'react';
+import { Button } from '@material-ui/core';
 import HeaderBar from './HeaderBar.js'
+import Carrousel from './Carrousel.js'
 import './App.css'; 
 
 /*class Text extends Component{
@@ -23,6 +25,7 @@ function App() {
   return (
     <div className='App'>
       <HeaderBar></HeaderBar>
+      <Carrousel></Carrousel>
     </div>
   );
 }
