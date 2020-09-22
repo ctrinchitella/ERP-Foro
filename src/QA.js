@@ -34,7 +34,7 @@ export default function OutlinedCard() {
                     PLACEHOLDER
         </Typography>
                 <Typography variant="h5" component="h2">
-                    Documents
+                    Q&A
         </Typography>
                 <Typography variant="body2" component="p">
                     PLACEHOLDER TEST

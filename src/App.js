@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import HeaderBar from './HeaderBar.js';
 import Carrousel from './Carrousel.js';
 import Docbtn from './DocumentBtn.js';
+import QA from './QA.js';
 import './App.css';
 
 /*class Text extends Component{
@@ -34,7 +35,7 @@ function App() {
           <Docbtn></Docbtn>
         </div>
         <div className='QA'>
-          <Docbtn></Docbtn>
+          <QA></QA>
         </div>
         <div className='Issues'>
           <Docbtn></Docbtn>
