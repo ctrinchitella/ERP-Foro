@@ -7,8 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Doc from 'C:/Users/Augus/ERP-Foro/src/folder.jpg';
-import FolderIcon from '@material-ui/icons/Folder';
+import Doc from 'C:/Users/Augus/ERP-Foro/src/add.jpg';
 
 const useStyles = makeStyles({
     root: {
@@ -34,11 +33,11 @@ export default function MediaCard() {
                 <CardMedia
                     className={classes.media}
                     image={Doc}
-                    title="Documents"
+                    title="Add"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Documents
+                        Add New
           </Typography>
                     <Typography variant="body2" component="p">
                         PLACEHOLDER

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from
-    "mdbreact";
+import Doc from 'C:/Users/Augus/ERP-Foro/src/NS.png';
+import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
 
 export default class MainCarousel extends Component {
     render() {
@@ -21,7 +21,7 @@ export default class MainCarousel extends Component {
                             <MDBView>
                                 <img
                                     className="d-block w-100"
-                                    src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg"
+                                    src={Doc}
                                     alt="First slide"
                                 />
                             </MDBView>

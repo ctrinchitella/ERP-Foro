@@ -5,7 +5,10 @@ import HeaderBar from './HeaderBar.js';
 import Carrousel from './Carrousel.js';
 import Docbtn from './DocumentBtn.js';
 import QA from './QA.js';
+import Issues from './Issues.js';
+import Add from './add.js';
 import './App.css';
+import { BorderStyle } from '@material-ui/icons';
 
 /*class Text extends Component{
   render(){
@@ -30,7 +33,12 @@ function App() {
         <HeaderBar></HeaderBar>
         <Carrousel></Carrousel>
       </div>
-      <div className= 'ButtonContainer'>
+      <div className='ButtonContainer' //style={
+        //{
+          //border: '2px solid black'
+        //}
+      //}
+      >
         <div className='Documents'>
           <Docbtn></Docbtn>
         </div>
@@ -38,11 +46,14 @@ function App() {
           <QA></QA>
         </div>
         <div className='Issues'>
-          <Docbtn></Docbtn>
+          <Issues></Issues>
         </div>
         <div className='New'>
-          <Docbtn></Docbtn>
+          <Add></Add>
         </div>
+      </div>
+      <div className='Contents'>
+
       </div>
     </view>
   );
