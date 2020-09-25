@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import Doc from 'C:/Users/Augus/ERP-Foro/src/NS.png';
+import Doc from './NS.png';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
 
 export default class MainCarousel extends Component {
