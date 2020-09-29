@@ -5,12 +5,16 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import Doc from './NS.png';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
+import { CenterFocusStrong, FormatAlignCenter } from '@material-ui/icons';
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
-        height: 350,
-        maxWidth: '100%'
+        height: 520,
+        maxWidth: '100%',
+        justifycontent: 'Center',
+        display: 'flex',
+        background: '#212121',
     }
 });
 
@@ -33,7 +37,7 @@ export default function MainCarousel() {
                             <MDBView>
                                 <img
                                     className="d-block w-100"
-                                    src={Doc}
+                                    src="https://www.esan.edu.pe/apuntes-empresariales/2018/09/14/1500x844_erp_gestion_proyectos.jpg"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>
@@ -51,7 +55,7 @@ export default function MainCarousel() {
                             <MDBView>
                                 <img
                                     className="d-block w-100"
-                                    src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+                                    src="https://www.esan.edu.pe/apuntes-empresariales/2018/09/14/1500x844_erp_gestion_proyectos.jpg"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>

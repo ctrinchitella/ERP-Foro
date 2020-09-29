@@ -67,7 +67,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 5%;
+  margin-left: 11%;
   margin-top: 3%;
 }
 .Issues {
@@ -79,7 +79,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 5%;
+  margin-left: 15%;
   margin-top: 3%;
 }
 .New {
@@ -96,6 +96,6 @@
 }
 .carousel-inner {
 
-  max-height: 470px;
+  max-height: 700px;
   align-content: center;
   }

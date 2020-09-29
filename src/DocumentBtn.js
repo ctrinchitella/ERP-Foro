@@ -11,13 +11,14 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import Doc from './folder.jpg';
 import FolderIcon from '@material-ui/icons/Folder';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
     root: {
-        background: 'black',
+        background: grey[900],
         maxWidth: 345,
-        color: 'white',
         width: 250,
+        color: 'white',
     },
     media: {
         height: 80,
@@ -44,16 +45,13 @@ export default function MediaCard() {
                     className={classes.media}
                     title="Documents"
                 >
-                    <IconButton style={{padding:0}}>
-                        <FolderIcon className={classes.iconStyle}/>
+                    <IconButton style={{ padding: 0 }}>
+                        <FolderIcon className={classes.iconStyle} />
                     </IconButton>
                 </CardMedia>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         Documents
-          </Typography>
-                    <Typography variant="body2" component="p">
-                        PLACEHOLDER
           </Typography>
                 </CardContent>
             </CardActionArea>

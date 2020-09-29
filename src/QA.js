@@ -10,10 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import Doc from './qa.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
     root: {
-        background: 'black',
+        background: grey[900],
         maxWidth: 345,
         color: 'white',
         width: 250,
@@ -39,7 +40,11 @@ export default function MediaCard() {
     return (
         <Card className={classes.root}>
             <CardActionArea>
-                <CardMedia className={classes.media} title="QA">
+                <CardMedia 
+                className={classes.media} 
+                title="QA"
+                indicatorColor="primary"
+                >
                 <IconButton style={{padding:0}}>
                     <QuestionAnswerIcon className={classes.iconStyle}/>
                 </IconButton>
@@ -47,9 +52,6 @@ export default function MediaCard() {
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         Q&A
-          </Typography>
-                    <Typography variant="body2" component="p">
-                        PLACEHOLDER
           </Typography>
                 </CardContent>
             </CardActionArea>

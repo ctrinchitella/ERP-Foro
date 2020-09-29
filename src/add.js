@@ -10,10 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import Doc from './add.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
     root: {
-        background: 'black',
+        background: grey[900],
         maxWidth: 345,
         color: 'white',
         width: 250,
@@ -47,9 +48,6 @@ export default function MediaCard() {
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         Add New
-          </Typography>
-                    <Typography variant="body2" component="p">
-                        PLACEHOLDER
           </Typography>
                 </CardContent>
             </CardActionArea>
