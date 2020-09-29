@@ -11,18 +11,21 @@ import Doc from './issues.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import { grey } from '@material-ui/core/colors';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         background: grey[900],
         maxWidth: 345,
-        color: 'white',
         width: 250,
+        color: 'white',
     },
     media: {
         height: 80,
         width: 100,
-        marginLeft: 80,
+        marginLeft: 75,
         marginTop: 20,
     },
     iconStyle: {
@@ -30,29 +33,73 @@ const useStyles = makeStyles({
         height: 100,
         marginLeft: 0,
         padding: 0,
-        color: 'white'
-    }
-});
+        color: 'white',
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+}));
 
 export default function MediaCard() {
     const classes = useStyles();
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
-        <Card className={classes.root}>
-            <CardActionArea>
-                <CardMedia className={classes.media} title="Issues">
-                    <IconButton style={{padding:0}}>
-                        <BugReportIcon className={classes.iconStyle}/>
-                    </IconButton>
-                </CardMedia>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Issues
+        <div>
+            <Card className={classes.root} onClick={handleOpen}>
+                <CardActionArea>
+                    <CardMedia className={classes.media} title="Issues">
+                        <IconButton style={{ padding: 0 }}>
+                            <BugReportIcon className={classes.iconStyle} />
+                        </IconButton>
+                    </CardMedia>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Issues
           </Typography>
-                </CardContent>
-            </CardActionArea>
-            
-        </Card>
+                    </CardContent>
+                </CardActionArea>
+
+            </Card>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={open}>
+                    <div className={classes.paper}>
+                        <h2>Animated React Modal</h2>
+                        <p>
+                            Carla se la come
+                        </p>
+                    </div>
+                </Fade>
+            </Modal>
+        </div>
     );
 }
 

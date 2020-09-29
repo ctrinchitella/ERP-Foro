@@ -9,7 +9,7 @@ import Issues from './Issues.js';
 import Add from './add.js';
 import './App.css';
 import { BorderStyle } from '@material-ui/icons';
-
+import DocBtnSPopUp from './DocBtnAPopUp';
 /*class Text extends Component{
   render(){
     const {arrayofNumbers,
