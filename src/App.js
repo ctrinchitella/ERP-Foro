@@ -32,8 +32,7 @@ function App() {
       <div className='App'>
         <HeaderBar></HeaderBar>
         <Carrousel></Carrousel>
-      </div>
-      <div className='ButtonContainer' //style={
+        <div className='ButtonContainer' //style={
         //{
           //border: '2px solid black'
         //}
@@ -52,6 +51,8 @@ function App() {
           <Add></Add>
         </div>
       </div>
+    </div>
+      
       <div className='Contents'>
 
       </div>

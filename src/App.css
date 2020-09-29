@@ -43,7 +43,7 @@
 
 .ButtonContainer{
   overflow: hidden;
-  padding: 11.4px 12px;
+  /*padding: 11.4px 12px;*/
   width: 100%;
 }
 .Documents {
@@ -55,7 +55,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 10%;
+  margin-left: 5%;
   margin-top: 3%;
 }
 .QA {
@@ -67,7 +67,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 8%;
+  margin-left: 5%;
   margin-top: 3%;
 }
 .Issues {
@@ -79,7 +79,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 11%;
+  margin-left: 5%;
   margin-top: 3%;
 }
 .New {
@@ -91,7 +91,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-right: 10%;
+  margin-right: 5%;
   margin-top: 3%;
 }
 .carousel-inner {

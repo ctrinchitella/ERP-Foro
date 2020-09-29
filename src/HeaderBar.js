@@ -6,15 +6,9 @@ import Tab from '@material-ui/core/Tab';
 import red from '@material-ui/core/colors/red';
 import { grey } from '@material-ui/core/colors';
 import { animateScroll as scroll} from 'react-scroll';
+import deleteIcon from '@material-ui/icons/Delete';
+import Icon from '@material-ui/core/Icon';
 
-
-const HeaderStyle = {
-    width : '100%',
-    height : '20%',
-    backgroundColor : 'black',
-    display: 'flex', 
-    justifyContent: 'center'
-  }
   
 const ButtonsBar = {
     width: '130px',
@@ -53,13 +47,66 @@ class Buttons extends Component {
         );
     }
 }*/
+const useStyles = makeStyles({
+    root: {
+        background: 'black',
+        maxWidth: 345,
+        color: 'white',
+        width: 250,
+    },
+    appBarStyle: {
+        width : '100%',
+        height : '20%',
+        background : grey[900],
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
+    indicator:{
+        backgroundColor: 'white',
+        height: 5
+    },
+    media: {
+        height: 80,
+        width: 100,
+        marginLeft: 75,
+        marginTop: 20,
+    }
+});
 
+function a11yProps(index) {
+    return {
+      id: 'full-width-tab-${index}',
+      'aria-controls': 'full-width-tabpanel-${index}',
+    };
+  }
 
-export default class HeaderBar extends Component {
-    render(){
-        
+export default function HeaderBar() {
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const handleChangeIndex = (index) => {
+        setValue(index);
+    };
         return(
-        <div style={HeaderStyle}>
+        <AppBar className={classes.appBarStyle} position="static">
+            <Tabs 
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary" classes={{indicator: classes.indicator}}>
+                <Tab label="Netsuite"  {...a11yProps(0)}/>
+                <Tab label="JD Edwards" {...a11yProps(1)} />
+                <Tab label="SAP" {...a11yProps(2)}/>
+                <Tab label="Oracle Cloud" {...a11yProps(3)}/>
+            </Tabs>
+        </AppBar>
+        );
+    
+}   
+/*<div style={HeaderStyle}>
             <a onClick={(e) => {console.log('Scrolling to NS');}}>
                 <Buttons title='Netsuite'/>
             </a>
@@ -72,12 +119,7 @@ export default class HeaderBar extends Component {
             <a onClick={(e) => {console.log('Scrolling to OC');}}>
                 <Buttons title='Oracle Cloud'/>
             </a>
-        </div>
-        
-        )
-    }
-}   
-
+        </div> */
 
 
 /*import React from 'react';
