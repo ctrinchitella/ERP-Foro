@@ -15,6 +15,14 @@ import { grey } from '@material-ui/core/colors';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,15 +47,27 @@ const useStyles = makeStyles(theme => ({
     modal: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        boxShadow: 'none',
+        border: 0
     },
     paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: '0px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(0),
+            width: theme.spacing(100),
+            height: theme.spacing(70),
+            padding: theme.spacing(2, 4, 3),
+        }
+    },
+    table: {
+        minWidth: 650,
     },
 }));
+
+
+
 
 export default function MediaCard() {
     const classes = useStyles();
@@ -60,6 +80,17 @@ export default function MediaCard() {
     const handleClose = () => {
         setOpen(false);
     };
+
+    function createData(name, Date, CreatedBy) {
+        return { name, Date, CreatedBy };
+    }
+
+    const rows = [
+        createData('test 1', 'test', 'test'),
+        createData('test 2', 'test', 'test'),
+        createData('test 3', 'test', 'test'),
+    ];
+
     return (
         <div>
             <Card className={classes.root} onClick={handleOpen}>
@@ -93,10 +124,35 @@ export default function MediaCard() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2>Animated React Modal</h2>
-                        <p>
-                            Carla se la come
-                        </p>
+                        <Paper>
+                            <div>
+                                <h2>Documents</h2>
+                            </div>
+                            <div className={classes.description}>
+                                <TableContainer component={Paper}>
+                                    <Table className={classes.table} aria-label="simple table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Doc Name</TableCell>
+                                                <TableCell align="right">Date</TableCell>
+                                                <TableCell align="right">Created By</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {rows.map((row) => (
+                                                <TableRow key={row.name}>
+                                                    <TableCell component="th" scope="row">
+                                                        {row.name}
+                                                    </TableCell>
+                                                    <TableCell align="right">{row.Date}</TableCell>
+                                                    <TableCell align="right">{row.CreatedBy}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </div>
+                        </Paper>
                     </div>
                 </Fade>
             </Modal>
