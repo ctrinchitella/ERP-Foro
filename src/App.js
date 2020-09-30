@@ -1,5 +1,6 @@
 //import React from 'react';
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import HeaderBar from './HeaderBar.js';
 import Carrousel from './Carrousel.js';
@@ -7,9 +8,11 @@ import Docbtn from './DocumentBtn.js';
 import QA from './QA.js';
 import Issues from './Issues.js';
 import Add from './add.js';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import './App.css';
 import { BorderStyle } from '@material-ui/icons';
-import DocBtnSPopUp from './DocBtnAPopUp';
+
 /*class Text extends Component{
   render(){
     const {arrayofNumbers,
@@ -26,34 +29,89 @@ import DocBtnSPopUp from './DocBtnAPopUp';
   }
 }*/
 
+/*function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};*/
+
+class ReadyToScroll extends Component {
+
+  constructor(props) {
+      super(props)
+      this.myRef = React.createRef()  
+  }
+
+  render() {
+      return <div ref={this.myRef}></div> 
+  }  
+
+  scrollToMyRef = () => window.scrollTo(0, this.myRef.current.offsetTop)   
+  // run this method to execute scrolling. 
+
+}
+
 function App() {
   return (
-    <view style={{ flex: 1 }}>
-      <div className='App'>
-        <HeaderBar></HeaderBar>
-        <Carrousel></Carrousel>
-        <div className='ButtonContainer' //style={
-        //{
-          //border: '2px solid black'
-        //}
-      //}
-      >
-        <div className='Documents'>
-          <Docbtn></Docbtn>
-        </div>
-        <div className='QA'>
-          <QA></QA>
-        </div>
-        <div className='Issues'>
-          <Issues></Issues>
-        </div>
-        <div className='New'>
-          <Add></Add>
-        </div>
+    <view style={{ flex: 1, scrollBehavior: "smooth" }}>
+      <div id="Home">
+        <div className='App'>
+            <HeaderBar></HeaderBar>
+            <Carrousel></Carrousel>
+            <div className='ButtonContainer' //style={
+            //{
+              //border: '2px solid black'
+            //}
+          //}
+          >
+            <div className='Documents'>
+              <Docbtn></Docbtn>
+            </div>
+            <div className='QA'>
+              <QA></QA>
+            </div>
+            <div className='Issues'>
+              <Issues></Issues>
+            </div>
+            <div className='New'>
+              <Add></Add>
+            </div>
+          </div>
+        </div> 
       </div>
-    </div>
-      
-      <div className='Contents'>
+      <div className='ErpContents'>
+        <div id="Netsuite" className="Netsuite">
+          Netsuite
+        </div>
+        <div id="JDEdwards" className="JDEdwards">
+          JDE
+        </div>
+        <div id="SAP" className="SAP">
+          sap
+        </div>
+        <div id="OracleCloud" className="OracleCloud">
+          OC
+        </div>
 
       </div>
     </view>

@@ -45,6 +45,7 @@
   overflow: hidden;
   /*padding: 11.4px 12px;*/
   width: 100%;
+  height: 400px;
 }
 .Documents {
   background-color: #ffffff;
@@ -98,4 +99,38 @@
 
   max-height: 700px;
   align-content: center;
-  }
+}
+.Netsuite{
+  background-color:#ffffff;
+  width: 100%;
+  height: 1080px;
+  border: #282c34;
+
+}
+.JDEdwards{
+  background-color: #212121;
+  width: 100%;
+  height: 1080px;
+  border: #282c34;
+
+}
+.SAP{
+  background-color: #ffffff;
+  width: 100%;
+  height: 1080px;
+  border: #282c34;
+
+}
+.OracleCloud{
+  background-color: #212121;
+  width: 100%;
+  height: 1080px;
+  border: #282c34;
+
+}
+.ErpContents{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
