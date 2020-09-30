@@ -29,7 +29,7 @@ const useStyles = makeStyles({
         marginLeft: 75,
         marginTop: 20,
     }
-});
+}); 
 
 function a11yProps(index) {
     return {

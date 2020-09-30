@@ -2,19 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
-import Doc from './folder.jpg';
 import FolderIcon from '@material-ui/icons/Folder';
 import { grey } from '@material-ui/core/colors';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Paper from '@material-ui/core/Paper';
+import { DataGrid } from '@material-ui/data-grid';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,15 +37,39 @@ const useStyles = makeStyles(theme => ({
     modal: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        boxShadow: 'none',
+        border: 0
     },
     paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: '0px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(0),
+            width: theme.spacing(100),
+            height: theme.spacing(70),
+            padding: theme.spacing(2, 4, 3),
+        }
+    },
+    table: {
+        minWidth: 650,
     },
 }));
+
+const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'docName', headerName: 'Document Name', width: 150 },
+    { field: 'date', headerName: 'Date', width: 130 },
+    { field: 'createdBy', headerName: 'Created By', width: 200 },
+];
+
+const rows = [
+    { id: 1, date: '9/30/2020', docName: 'Test1.docx', createdBy: 'Augusto Hontalvilla' },
+    { id: 2, date: '9/30/2020', docName: 'Test2.docx', createdBy: 'Augusto Hontalvilla' },
+    { id: 3, date: '9/30/2020', docName: 'Test3.docx', createdBy: 'Augusto Hontalvilla' },
+    { id: 4, date: '9/30/2020', docName: 'Test4.docx', createdBy: 'Augusto Hontalvilla' },
+    { id: 5, date: '9/30/2020', docName: 'Test5.docx', createdBy: 'Augusto Hontalvilla' },
+];
 
 export default function MediaCard() {
     const classes = useStyles();
@@ -60,6 +82,7 @@ export default function MediaCard() {
     const handleClose = () => {
         setOpen(false);
     };
+
     return (
         <div>
             <Card className={classes.root} onClick={handleOpen}>
@@ -93,10 +116,14 @@ export default function MediaCard() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2>Animated React Modal</h2>
-                        <p>
-                            Carla se la come
-                        </p>
+                        <Paper>
+                            <div>
+                                <h2>Documents</h2>
+                            </div>
+                            <div style={{ height: 400, width: '100%', verticalalign:'middle' }}>
+                                <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+                            </div>
+                        </Paper>
                     </div>
                 </Fade>
             </Modal>
