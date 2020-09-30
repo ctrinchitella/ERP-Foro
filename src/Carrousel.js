@@ -36,8 +36,8 @@ export default function MainCarousel() {
                         <MDBCarouselItem itemId="1">
                             <MDBView>
                                 <img
-                                    className="d-block w-100"
-                                    src="https://www.esan.edu.pe/apuntes-empresariales/2018/09/14/1500x844_erp_gestion_proyectos.jpg"
+                                    className={classes.root}
+                                    src="https://www.nicepng.com/png/detail/142-1421271_browse-oracle-netsuite-logo.png"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>
@@ -45,8 +45,8 @@ export default function MainCarousel() {
                         <MDBCarouselItem itemId="2">
                             <MDBView>
                                 <img
-                                    className="d-block w-100"
-                                    src="https://www.esan.edu.pe/apuntes-empresariales/2018/09/14/1500x844_erp_gestion_proyectos.jpg"
+                                    className={classes.root}
+                                    src="https://cloud.logicom.net/wp-content/uploads/2018/05/oracle-cloud-logo-1.png"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>
@@ -54,8 +54,8 @@ export default function MainCarousel() {
                         <MDBCarouselItem itemId="3">
                             <MDBView>
                                 <img
-                                    className="d-block w-100"
-                                    src="https://www.esan.edu.pe/apuntes-empresariales/2018/09/14/1500x844_erp_gestion_proyectos.jpg"
+                                    className={classes.root}
+                                    src="https://www.livingstone-tech.com/wp-content/uploads/2019/06/1280px-SAP-Logo.svg.png"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>
