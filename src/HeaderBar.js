@@ -8,6 +8,7 @@ import { grey } from '@material-ui/core/colors';
 import { animateScroll as scroll} from 'react-scroll';
 import deleteIcon from '@material-ui/icons/Delete';
 import Icon from '@material-ui/core/Icon';
+import { Link, animateScroll } from "react-scroll";
 
   
 const ButtonsBar = {
