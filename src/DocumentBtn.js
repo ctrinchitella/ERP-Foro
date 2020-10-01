@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: 'none',
-        border: 0
+        border: 0,
     },
     paper: {
         display: 'flex',
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
             width: theme.spacing(100),
             height: theme.spacing(70),
             padding: theme.spacing(2, 4, 3),
-        }
+        },
     },
     table: {
         minWidth: 650,
@@ -120,7 +120,7 @@ export default function MediaCard() {
                             <div>
                                 <h2>Documents</h2>
                             </div>
-                            <div style={{ height: 400, width: '100%', verticalalign:'middle' }}>
+                            <div style={{ height: 400, width: '100%', verticalalign:'middle',  marginTop: 40 }}>
                                 <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
                             </div>
                         </Paper>

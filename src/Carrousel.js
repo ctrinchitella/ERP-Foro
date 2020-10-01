@@ -15,6 +15,7 @@ const useStyles = makeStyles({
         justifycontent: 'Center',
         display: 'flex',
         background: '#212121',
+        objectFit: 'fill',
     }
 });
 
@@ -37,7 +38,7 @@ export default function MainCarousel() {
                             <MDBView>
                                 <img
                                     className={classes.root}
-                                    src="https://www.nicepng.com/png/detail/142-1421271_browse-oracle-netsuite-logo.png"
+                                    src="https://i2.wp.com/www.whatphone.net/wp-content/uploads/2019/11/Oracle.jpg?fit=1024%2C576&ssl=1"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>
@@ -46,7 +47,7 @@ export default function MainCarousel() {
                             <MDBView>
                                 <img
                                     className={classes.root}
-                                    src="https://cloud.logicom.net/wp-content/uploads/2018/05/oracle-cloud-logo-1.png"
+                                    src="https://www.computerworld.es/archivos/201809/oracle-cloud-edificio.jpg"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>
@@ -55,7 +56,7 @@ export default function MainCarousel() {
                             <MDBView>
                                 <img
                                     className={classes.root}
-                                    src="https://www.livingstone-tech.com/wp-content/uploads/2019/06/1280px-SAP-Logo.svg.png"
+                                    src="https://noblue.es/wp-content/uploads/2019/02/netsuite-5-star-award-2019.jpg"
                                     alt="Max-width 100%"
                                 />
                             </MDBView>

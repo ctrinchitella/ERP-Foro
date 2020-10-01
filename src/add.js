@@ -91,9 +91,9 @@ export default function MediaCard() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2>Animated React Modal</h2>
+                        <h2>Add New</h2>
                         <p>
-                            Carla se la come
+                            Puto el q lee
                         </p>
                     </div>
                 </Fade>
