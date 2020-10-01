@@ -14,10 +14,11 @@ const useStyles = makeStyles({
     },
     appBarStyle: {
         width : '100%',
-        height : '20%',
+        height : 50,
         background : grey[900],
         justifyContent: 'center', 
         alignItems: 'center'
+        
     },
     indicator:{
         backgroundColor: 'white',
@@ -51,7 +52,7 @@ export default function HeaderBar() {
         console.log(value);
     };
     return( 
-    <AppBar className={classes.appBarStyle} position="static">
+    <AppBar className={classes.appBarStyle} position="fixed">
         <Tabs 
         value={value}
         onChange={handleChange}
