@@ -57,6 +57,7 @@ export default function HeaderBar() {
         value={value}
         onChange={handleChange}
         indicatorColor="primary" classes={{indicator: classes.indicator}}>
+            <LinkTab label="Home" {...a11yProps(1)} href="#Home"/>
             <LinkTab label="Netsuite" {...a11yProps(1)} href="#Netsuite"/>
             <LinkTab label="JD Edwards" {...a11yProps(1)} href="#JDEdwards"/>
             <LinkTab label="SAP" {...a11yProps(2)} href="#SAP"/>
