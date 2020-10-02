@@ -17,19 +17,19 @@ import { DataGrid } from '@material-ui/data-grid';
 const useStyles = makeStyles(theme => ({
     root: {
         background: grey[900],
-        maxWidth: 345,
-        width: 250,
+        maxWidth: '100%',
+        width: '100%',
+        height: 300,
         color: 'white',
     },
     media: {
-        height: 80,
-        width: 100,
-        marginLeft: 75,
-        marginTop: 20,
+        height: 300,
+        width: '100%',
+        marginTop: '15%',
     },
     iconStyle: {
-        width: 100,
-        height: 100,
+        width: 125,
+        height: 125,
         marginLeft: 0,
         padding: 0,
         color: 'white',
@@ -84,7 +84,7 @@ export default function MediaCard() {
     };
 
     return (
-        <div>
+        <div style={{width:'100%', height:'100%'}}>
             <Card className={classes.root} onClick={handleOpen}>
                 <CardActionArea>
                     <CardMedia
@@ -94,12 +94,12 @@ export default function MediaCard() {
                         <IconButton style={{ padding: 0 }}>
                             <FolderIcon className={classes.iconStyle} />
                         </IconButton>
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h1">
+                                Documents
+                            </Typography>
+                        </CardContent>
                     </CardMedia>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Documents
-          </Typography>
-                    </CardContent>
                 </CardActionArea>
             </Card>
             <Modal

@@ -45,9 +45,11 @@
   overflow: hidden;
   /*padding: 11.4px 12px;*/
   width: 100%;
-  height: 400px;
+  height: 30%;
 }
 .Documents {
+  width: 20%;
+  height: 20%;
   background-color: #ffffff;
   min-height: 30vh;
   display: flex;
@@ -56,10 +58,15 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 5%;
-  margin-top: 3%;
+  margin-left: 4%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  /*margin-left: 5%;
+  margin-top: 3%;*/
 }
 .QA {
+  width: 20%;
+  height: 20%;
   background-color: #ffffff;
   min-height: 30vh;
   display: flex;
@@ -68,38 +75,52 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 11%;
-  margin-top: 3%;
+  margin-left: 4%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  /*margin-left: 11%;
+  margin-top: 3%;*/
 }
 .Issues {
+  width: 20%;
+  height: 20%;
   background-color: #ffffff;
   min-height: 30vh;
   display: flex;
-  flex-direction: initial;
   float: left;
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-left: 15%;
-  margin-top: 3%;
+  margin-left: 4%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  /*margin-left: 15%;
+  margin-top: 3%;*/
 }
 .New {
+  width: 20%;
+  height: 20%;
   background-color: #ffffff;
   min-height: 30vh;
   display: flex;
   flex-direction: row;
-  float: right;
+  float: left;
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-right: 5%;
-  margin-top: 3%;
+  margin-left: 4%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+ /* margin-right: 5%;
+  margin-top: 3%;*/
 }
 .carousel-inner {
 
   max-height: 700px;
   align-content: center;
 }
+
+/*-----------------ERP Styles - main page------------------*/
 .Netsuite{
   background-color:#ffffff;
   width: 100%;
@@ -134,3 +155,53 @@
   display: flex;
   flex-direction: column;
 }
+
+.ERPInfo{
+  overflow: hidden;
+  width: 100%;
+  height: 20%;
+  margin-bottom: 2%;
+}
+
+p{
+  display: flex;
+  flex-direction: initial;
+  float: left;
+  margin-left: 3%;
+  margin-top: 1%;
+  margin-right: 0;
+  width: 50%;
+  height: 20%;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.NSimg{
+  display: flex;
+  flex-direction: initial;
+  float: left;
+  width: 500px;
+  height: 200px;
+  margin-left: 10%;
+}
+
+.ERPTitle{
+  margin-top: 5%;
+  margin-left: 3%;
+}
+
+.NetsuiteButtons {
+  display: flex;
+  flex-direction: 'row',
+}
+.NSbuttons {
+  background-color: #212121;
+  color: #ffffff;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 40%;
+  height: 80px;
+  margin-left: 3%;
+  margin-top: 1%;
+  margin-right: 3%;
+}
+

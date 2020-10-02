@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         color: 'white',
         width: 250,
     },
-    appBarStyle: {
+    appBarStyle: { 
         width : '100%',
         height : 50,
         background : grey[900],

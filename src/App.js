@@ -13,6 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { grey } from '@material-ui/core/colors';
+import Netsuitelogo from './Netsuite-logo.png';
 
 function App() {
   
@@ -20,7 +21,6 @@ function App() {
     <view style={{ flex: 1, scrollBehavior: "smooth" }}>
       <div id="Home">
         <div className='App'>
-        
             <HeaderBar></HeaderBar>
             <Carrousel></Carrousel>
             <div className='ButtonContainer' //style={
@@ -46,7 +46,28 @@ function App() {
       </div>
       <div className='ErpContents'>
         <div id="Netsuite" className="Netsuite">
-          Netsuite
+        <h1 className="ERPTitle" style={{color: grey[900]}}><b>Netsuite</b></h1>
+          <div className="ERPInfo">
+            <p>
+            NetSuite is engineered to streamline mission-critical processes. 
+            In turn, this allows businesses to continue focusing on what they do best and to react to new market opportunities swiftly and confidently. 
+            From financials to supply chain management to billing and beyond, NetSuite ERP gives companies clear visibility and control of their business.
+            From financials to supply chain management to billing and beyond, NetSuite ERP gives companies clear visibility and control of their business.
+            </p>
+            <img className="NSimg" src={Netsuitelogo}/>
+          </div>
+          <div className="NetsuiteButtons">
+            <button className="NSbuttons" size="200" type="button">  How to use NS processes (Basic)</button>
+            <button className="NSbuttons" size="200" type="button">  Postman Configuration and Uses</button>
+          </div>
+          <div className="NetsuiteButtons">
+            <button className="NSbuttons" size="200" type="button">  Default NS Services</button>
+            <button className="NSbuttons" size="200" type="button">  Cloud Inventory Integration</button>
+          </div>
+          <div className="NetsuiteButtons">
+            <button className="NSbuttons" size="200" type="button">  Default NS Services</button>
+            <button className="NSbuttons" size="200" type="button">  Cloud Inventory Integration</button>
+          </div>
         </div>
         <div id="JDEdwards" className="JDEdwards">
           JDE
