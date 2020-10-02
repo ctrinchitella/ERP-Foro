@@ -92,9 +92,7 @@ export default function MediaCard() {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <h2>Add New</h2>
-                        <p>
-                            Puto el q lee
-                        </p>
+                        <img src="https://media1.tenor.com/images/467d353f7e2d43563ce13fddbb213709/tenor.gif?itemid=12136175"/>
                     </div>
                 </Fade>
             </Modal>

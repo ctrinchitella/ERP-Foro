@@ -125,7 +125,7 @@ export default function MediaCard() {
         setOpen(false);
     };
     return (
-        <div style={{width:'100%', height:'100%'}}>
+        <div style={{ width: '100%', height: '100%' }}>
             <Card className={classes.root} onClick={handleOpen}>
                 <CardActionArea>
                     <CardMedia
@@ -136,7 +136,7 @@ export default function MediaCard() {
                         <IconButton style={{ padding: 0 }}>
                             <QuestionAnswerIcon className={classes.iconStyle} />
                         </IconButton>
-                    
+
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 Q&A
@@ -159,31 +159,28 @@ export default function MediaCard() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <Paper>
-                            <div>
-                                <h2>Questions and Answers</h2>
-                            </div>
-                            <React.Fragment>
-                                <CssBaseline />
-                                <Paper square className={classes.paper}>
-                                    <List className={classes.list}>
-                                        {messages.map(({ id, primary, secondary, person }) => (
-                                            <React.Fragment key={id}>
-                                                {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
-                                                {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
-                                                <ListItem button>
-                                                    <ListItemAvatar>
-                                                        <Avatar alt="Profile Picture" src={person} />
-                                                    </ListItemAvatar>
-                                                    <ListItemText primary={primary} secondary={secondary} />
-                                                </ListItem>
-                                            </React.Fragment>
-                                        ))}
-                                    </List>
-                                </Paper>
-
-                            </React.Fragment>
-                        </Paper>
+                        <div>
+                            <h2>Questions and Answers</h2>
+                        </div>
+                        <React.Fragment>
+                            <CssBaseline />
+                            <Paper square className={classes.paper}>
+                                <List className={classes.list}>
+                                    {messages.map(({ id, primary, secondary, person }) => (
+                                        <React.Fragment key={id}>
+                                            {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
+                                            {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
+                                            <ListItem button>
+                                                <ListItemAvatar>
+                                                    <Avatar alt="Profile Picture" src={person} />
+                                                </ListItemAvatar>
+                                                <ListItemText primary={primary} secondary={secondary} />
+                                            </ListItem>
+                                        </React.Fragment>
+                                    ))}
+                                </List>
+                            </Paper>
+                        </React.Fragment>
                     </div>
                 </Fade>
             </Modal>

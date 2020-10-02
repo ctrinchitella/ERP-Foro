@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
@@ -71,19 +70,19 @@ export default function MediaCard() {
     };
 
     return (
-        <div style={{width:'100%', height:'100%'}}>
+        <div style={{ width: '100%', height: '100%' }}>
             <Card className={classes.root} onClick={handleOpen}>
                 <CardActionArea>
                     <CardMedia className={classes.media} title="Issues">
                         <IconButton style={{ padding: 0 }}>
                             <BugReportIcon className={classes.iconStyle} />
                         </IconButton>
-                    
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Issues
+
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                Issues
                         </Typography>
-                    </CardContent>
+                        </CardContent>
                     </CardMedia>
                 </CardActionArea>
 
@@ -102,52 +101,56 @@ export default function MediaCard() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <Paper>
-                            <div>
-                                <h2>Issues</h2>
-                            </div>
-                            <div className={classes.root}>
-                                <Accordion>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1a-content"
-                                        id="panel1a-header"
-                                    >
-                                        <Typography className={classes.heading}>Accordion 1</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
+                        <div>
+                            <h2>Issues</h2>
+                        </div>
+                        <div className={classes.paper}>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                >
+                                    <Typography className={classes.heading}>NS:Invalid Login Attempt</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                        sit amet blandit leo lobortis eget.
           </Typography>
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel2a-content"
-                                        id="panel2a-header"
-                                    >
-                                        <Typography className={classes.heading}>Accordion 2</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel2a-content"
+                                    id="panel2a-header"
+                                >
+                                    <Typography className={classes.heading}>JDE:Cannot see registered tables</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                        sit amet blandit leo lobortis eget.
           </Typography>
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion disabled>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel3a-content"
-                                        id="panel3a-header"
-                                    >
-                                        <Typography className={classes.heading}>Disabled Accordion</Typography>
-                                    </AccordionSummary>
-                                </Accordion>
-                            </div>
-                        </Paper>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel3a-content"
+                                    id="panel3a-header"
+                                >
+                                    <Typography className={classes.heading}>OC:Service calll "Unauthorized Access"</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                        sit amet blandit leo lobortis eget.
+          </Typography>
+                                </AccordionDetails>
+                            </Accordion>
+                        </div>
                     </div>
                 </Fade>
             </Modal>
