@@ -14,6 +14,7 @@ import { grey } from '@material-ui/core/colors';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import MultiTabBar from './MultiTabsAddNew.js';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles(theme => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        height: 600
     },
 }));
 
@@ -92,7 +94,8 @@ export default function MediaCard() {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <h2>Add New</h2>
-                        <img src="https://media1.tenor.com/images/467d353f7e2d43563ce13fddbb213709/tenor.gif?itemid=12136175"/>
+                        <MultiTabBar/>
+                        
                     </div>
                 </Fade>
             </Modal>

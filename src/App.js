@@ -7,6 +7,7 @@ import Docbtn from './DocumentBtn.js';
 import QA from './QA.js';
 import Issues from './Issues.js';
 import Add from './add.js';
+import BootButtons from './BootCards.js';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,6 +15,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { grey } from '@material-ui/core/colors';
 import Netsuitelogo from './Netsuite-logo.png';
+import JDELogo from './imgs/Jd-Edwards-Logo.jpg';
+import SAPLogo from './imgs/SAP-Logo.png';
+import OCLogo from './imgs/OC-Logo.png';
+
 
 function App() {
   
@@ -45,7 +50,7 @@ function App() {
         </div> 
       </div>
       <div className='ErpContents'>
-        <div id="Netsuite" className="Netsuite">
+      <div id="Netsuite" className="Netsuite">
         <h1 className="ERPTitle" style={{color: grey[900]}}><b>Netsuite</b></h1>
           <div className="ERPInfo">
             <p>
@@ -69,15 +74,41 @@ function App() {
             <button className="NSbuttons" size="200" type="button">  Cloud Inventory Integration</button>
           </div>
         </div>
-        <div id="JDEdwards" className="JDEdwards">
-          JDE
+      <div id="JDEdwards" className="JDEdwards">
+        <h1 className="ERPTitle" style={{color: 'white'}}><b>JD Edwards</b></h1>
+        <div className="ERPInfo">
+            <p style={{color:'white'}}>
+            This ERP was an Enterprise resource planning software company. Products included World for IBM AS/400 minicomputers, OneWorld for CNC architecture, and JD Edwards EnterpriseOne. 
+            The company was founded March 1977 in Denver, Colorado, by Jack Thompson, C.T.P.
+            </p>
+            <img className="NSimg" src={JDELogo}/>
         </div>
-        <div id="SAP" className="SAP">
-          sap
+        <div>
+          <BootButtons/>
         </div>
-        <div id="OracleCloud" className="OracleCloud">
-          OC
+      </div>
+
+
+      <div id="SAP" className="SAP">
+        <h1 className="ERPTitle" style={{color: grey[900]}}><b>SAP</b></h1>
+        <div className="ERPInfo">
+            <p style={{color:grey[900]}}>
+            SAP is a market leader in providing ERP (Enterprise Resource and Planning) solutions and services. In this chapter, we will try to understand more on ERP and where it should be used. 
+            In addition, we will learn the implementation techniques of ERP along with the ERP packages available in the market.
+            </p>
+            <img className="NSimg" src={SAPLogo}/>
         </div>
+      </div>
+      <div id="OracleCloud" className="OracleCloud">
+        <h1 className="ERPTitle" style={{color: 'white'}}><b>Oracle Cloud</b></h1>
+        <div className="ERPInfo">
+            <p style={{color:'white'}}>
+            Oracle ERP Cloud is an end-to-end Software as a service suite that manages enterprise operations. The suite runs on an Oracle technology stack in Oracle’s cloud centers. Oracle ERP Cloud is accessible through both public and private cloud implementation and supports hybrid deployment. Oracle supplies updates to Oracle ERP Cloud at least twice annually. 
+            According to the company’s website, there are nine different software modules that make up the Oracle ERP Cloud suite
+            </p>
+            <img className="NSimg" src={OCLogo}/>
+        </div>
+      </div>
 
       </div>
     </view>
