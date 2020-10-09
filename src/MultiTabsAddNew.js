@@ -5,18 +5,16 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import { grey } from '@material-ui/core/colors';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import Dropdown from './Dropdown.js';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const useStyles = makeStyles(theme => ({
-    appBarStyle: { 
-        width : '80%',
-        height : 40,
-        background : 'white',
-        justifyContent: 'center', 
-        alignItems: 'center',
-        color: grey[900],
-        
+    root: {
+        marginTop: 30
+    },
+    input: {
+        display: 'none',
     },
     MultiTabStyle: {
         width: 500,
@@ -27,6 +25,27 @@ const useStyles = makeStyles(theme => ({
         marginTop: 70
     },
     CommonText: {
+        width: 230,
+        height: 25,
+        marginLeft: 20,
+        marginTop: 30,
+    },
+    UploadButtonStyle: {
+        backgroundColor: grey[900],
+        width: 500,
+        height: 100,
+        color: 'white',
+        marginTop: 30,
+        marginLeft: 0
+    },
+    ButtonStyle: {
+        backgroundColor: grey[900],
+        color: 'white',
+        marginLeft: 20,
+        width: 150,
+        height: 40
+    },
+    QuestionText: {
         width: 230,
         height: 25,
         marginLeft: 20,
@@ -45,12 +64,36 @@ export default function MultiTabs() {
         console.log(value);
     };
     return( 
-    <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example" className={classes.MultiTabStyle}>
+    <Tabs defaultActiveKey="Docs" transition={false} id="noanim-tab-example" className={classes.MultiTabStyle}>
         <Tab eventKey="Docs" title="Docs">
-            <Dropdown/>
+            <Dropdown />
+            <div className={classes.root}>
+                <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                />
+                <label htmlFor="contained-button-file">
+                    <Button className={classes.UploadButtonStyle} variant="contained" component="span" startIcon={<CloudUploadIcon />}>
+                    Upload
+                    </Button>
+                </label>
+            </div>
+            <div className="AddNewButtons">
+                <Button variant="contained" className={classes.ButtonStyle}>
+                    Submit
+                </Button>
+                <Button variant="contained" className={classes.ButtonStyle}>
+                    Cancel
+                </Button>
+            </div>
+            
         </Tab>
         <Tab eventKey="Q&A" title="Q&A">
             <Dropdown/>
+            <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
         </Tab>
         <Tab eventKey="Issue" title="Issues">
             <div className="NetsuiteButtons">
@@ -65,7 +108,28 @@ export default function MultiTabs() {
             defaultValue=""
             variant="outlined" className={classes.MultiLineTexts}
             />
-            
+            <div className={classes.root}>
+                <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                />
+                <label htmlFor="contained-button-file">
+                    <Button className={classes.UploadButtonStyle} variant="contained" component="span"  startIcon={<CloudUploadIcon />}>
+                    Upload
+                    </Button>
+                </label>
+            </div>
+            <div className="AddNewButtons">
+                <Button variant="contained" className={classes.ButtonStyle}>
+                    Submit
+                </Button>
+                <Button variant="contained" className={classes.ButtonStyle}>
+                    Cancel
+                </Button>
+            </div>
         </Tab>
     </Tabs>
     );
