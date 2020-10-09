@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dropdown from './Dropdown.js';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import RadioButtons from './RadioButton.js';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,6 +24,11 @@ const useStyles = makeStyles(theme => ({
         width: 500,
         height: 100,
         marginTop: 70
+    },
+    AnswerLineTexts: {
+        width: 500,
+        height: 100,
+        marginBottom: 20
     },
     CommonText: {
         width: 230,
@@ -46,10 +52,10 @@ const useStyles = makeStyles(theme => ({
         height: 40
     },
     QuestionText: {
-        width: 230,
+        width: 400,
         height: 25,
-        marginLeft: 20,
-        marginTop: 30,
+        marginTop: 70,
+        marginBottom: 50
     }
 }));
 
@@ -92,8 +98,27 @@ export default function MultiTabs() {
             
         </Tab>
         <Tab eventKey="Q&A" title="Q&A">
-            <Dropdown/>
-            <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
+            <div>
+                <Dropdown/> 
+                <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText}/>
+                <RadioButtons/>
+            </div>
+            <TextField
+            id="Answer"
+            label="Answer"
+            multiline
+            rows={4}
+            defaultValue=""
+            variant="outlined" className={classes.AnswerLineTexts} disabled="true"
+            />
+            <div className="AddNewButtons">
+                <Button variant="contained" className={classes.ButtonStyle}>
+                    Submit
+                </Button>
+                <Button variant="contained" className={classes.ButtonStyle}>
+                    Cancel
+                </Button>
+            </div>
         </Tab>
         <Tab eventKey="Issue" title="Issues">
             <div className="NetsuiteButtons">
