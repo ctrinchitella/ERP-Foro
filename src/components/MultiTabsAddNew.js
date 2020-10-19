@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Tabs from 'react-bootstrap/Tabs';
@@ -68,6 +68,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function MultiTabs() {
     const classes = useStyles();
+    const [ERPAddDoc] = useState();
     const verEquipos = () => {
         var docs = db.collection("equipos").doc("2");
         docs.get().then(function(doc) {

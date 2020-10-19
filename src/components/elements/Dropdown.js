@@ -50,7 +50,7 @@ export default function Dropdown(props) {
     const [currency, setCurrency] = React.useState('EUR');
     const handleChange = (event) => {       
         setCurrency(event.target.value);
-        alert(props.DefaultERP)
+        props.selectERP(event.target.value)
     };
     return( 
         <div>
