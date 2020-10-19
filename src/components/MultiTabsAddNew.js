@@ -12,6 +12,8 @@ import RadioButtons from './elements/RadioButton.js';
 import db from '../firestore';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
+import Add from './DB/Add';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -81,18 +83,22 @@ export default function MultiTabs() {
     const handleUploadSuccess = filename => {
         /*var ERP = "JDE";
         firebase.storage().ref("files").child(filename).getDownloadURL().then(url =>
-            this.setState({ files: files }));
+            this.setState({ files: files }));*/
         firebase.storage().ref("files").child(filename).getDownloadURL().then(url =>
-            AddFile.addFile(url, ERP));*/
+            Add.addDocument("ERP", "title", "UploadedBy", url));
+            
             alert("UPLOADED SUCCESSFULLY")
     };
     const handleUploadFailed = filename =>{
         alert("FAILED TO UPLOAD.")
     }
+    const selectERPDocs = erp =>{
+        alert(erp)
+    }
     return (
         <Tabs defaultActiveKey="Docs" transition={false} id="noanim-tab-example" className={classes.MultiTabStyle}>
             <Tab eventKey="Docs" title="Docs">
-                <Dropdown />
+                <Dropdown DefaultERP="JDE" selectERP={selectERPDocs}/>
                 <div className={classes.root}>
                     <label><FileUploader
                    //accept="image/*"
