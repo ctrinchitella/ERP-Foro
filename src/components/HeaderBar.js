@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -34,8 +34,8 @@ const useStyles = makeStyles({
 
 function a11yProps(index) {
     return {
-      id: 'full-width-tab-${index}',
-      'aria-controls': 'full-width-tabpanel-${index}',
+      id: 'full-width-tab-{index}',
+      'aria-controls': 'full-width-tabpanel-{index}',
     };
   }
 

@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import Doc from './NS.png';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
-import { CenterFocusStrong, FormatAlignCenter } from '@material-ui/icons';
 
 const useStyles = makeStyles({
     root: {
@@ -30,7 +28,6 @@ export default function MainCarousel() {
                     length={3}
                     showControls={true}
                     showIndicators={true}
-                    className="z-depth-1"
                     className={classes.root}
                 >
                     <MDBCarouselInner className={classes.root}>
