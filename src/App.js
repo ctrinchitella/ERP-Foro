@@ -2,10 +2,10 @@
 import React from 'react';
 import HeaderBar from './components/HeaderBar.js';
 import Carrousel from './components/elements/Carrousel.js';
-import Docbtn from './components/Document.js';
+import Docbtn from './components/DocumentBtn.js';
 import QA from './components/QA.js';
-import Issues from './components/Issues.js';
-import Add from './components/Add.js';
+import Issues from './components/IssuesBtn.js';
+import Add from './components/AddBtn.js';
 import BootButtons from './components/BootCards.js';
 import './App.css';
 import { grey } from '@material-ui/core/colors';

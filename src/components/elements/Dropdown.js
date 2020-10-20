@@ -45,12 +45,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function MultiTabs() {
+export default function Dropdown(props) {
     const classes = useStyles();
     const [currency, setCurrency] = React.useState('EUR');
-
-    const handleChange = (event) => {
+    const handleChange = (event) => {       
         setCurrency(event.target.value);
+        props.selectERP(event.target.value)
     };
     return( 
         <div>
