@@ -35,5 +35,37 @@ addDocument = (ERP, title, UploadedBy, FileID) => {
         return ("error")
     })
 }
+addIssue = (ERP, title, description, FileID) => {    
+    var ActualDate = this.concatenatedDate();
+    db.collection("issues").doc("I"+ActualDate).set({
+        ERP: ERP,
+        Title: title,
+        Date: this.concatenatedDate(),
+        Description: description,
+        FileID: FileID,
+    }).then(() => {
+        console.log("File Uploaded Successfully!")
+    }).catch(() => {
+        console.log("error")
+        return ("error")
+    })
+}
+addQA = (ERP, question,questionedBy, hasAnswer, answer, answeredBy) => {    
+    var ActualDate = this.concatenatedDate();
+    db.collection("questions").doc("Q"+ActualDate).set({
+        ERP: ERP,
+        Question: question,
+        HasAnswer: hasAnswer,
+        Answer: answer,
+        QuestionedBy: questionedBy,
+        Date: this.concatenatedDate(),
+        answeredBy:answeredBy,
+    }).then(() => {
+        console.log("File Uploaded Successfully!")
+    }).catch(() => {
+        console.log("error")
+        return ("error")
+    })
+}
 }
 export default new Add();

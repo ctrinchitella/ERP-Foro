@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -13,6 +13,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import { DataGrid } from '@material-ui/data-grid';
+import db from '../firestore';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -52,30 +53,34 @@ const useStyles = makeStyles(theme => ({
         },
     },
     table: {
-        minWidth: 650,
+        minWidth: 800,
     },
 }));
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'docName', headerName: 'Document Name', width: 150 },
-    { field: 'date', headerName: 'Date', width: 130 },
-    { field: 'createdBy', headerName: 'Created By', width: 200 },
+    { field: 'ERP', headerName: 'ERP', width: 120},
+    { field: 'Title', headerName: 'Title', width: 200 },
+    { field: 'Date', headerName: 'Uploaded Date', width: 200 },
+    { field: 'Resource', headerName: 'Uploaded By', width: 200 },    
 ];
 
-const rows = [
-    { id: 1, date: '9/30/2020', docName: 'Test1.docx', createdBy: 'Augusto Hontalvilla' },
-    { id: 2, date: '9/30/2020', docName: 'Test2.docx', createdBy: 'Augusto Hontalvilla' },
-    { id: 3, date: '9/30/2020', docName: 'Test3.docx', createdBy: 'Augusto Hontalvilla' },
-    { id: 4, date: '9/30/2020', docName: 'Test4.docx', createdBy: 'Augusto Hontalvilla' },
-    { id: 5, date: '9/30/2020', docName: 'Test5.docx', createdBy: 'Augusto Hontalvilla' },
-];
+
 
 export default function MediaCard() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [rows, setRows] = useState([]);
 
     const handleOpen = () => {
+        var files = db.collection("files")
+        files.onSnapshot((snapShots) => {
+            setRows( snapShots.docs.map(doc => {
+                    return { id: doc.id, url: doc.data().FileID, ERP: doc.data().ERP, Title: doc.data().Title, Date: doc.data().Date.substring(8, 10)+":"+doc.data().Date.substring(10, 12)+" "+doc.data().Date.substring(6, 8)+"-"+doc.data().Date.substring(4, 6)+"-"+doc.data().Date.substring(0, 4), Resource: doc.data().UploadedBy }
+                })
+            )
+        }, error => {
+            console.log(error)
+        });
         setOpen(true);
     };
 
@@ -84,7 +89,7 @@ export default function MediaCard() {
     };
 
     return (
-        <div style={{width:'100%', height:'100%'}}>
+        <div style={{ width: '100%', height: '100%' }}>
             <Card className={classes.root} onClick={handleOpen}>
                 <CardActionArea>
                     <CardMedia
@@ -120,8 +125,8 @@ export default function MediaCard() {
                             <div>
                                 <h2>Documents</h2>
                             </div>
-                            <div style={{ height: 400, width: '100%', verticalalign:'middle',  marginTop: 40 }}>
-                                <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+                            <div style={{ height: 400, width: '100%', verticalalign: 'middle', marginTop: 40 }}>
+                                <DataGrid rows={rows} columns={columns} pageSize={5} disableMultipleSelection={true}/>
                             </div>
                         </Paper>
                     </div>

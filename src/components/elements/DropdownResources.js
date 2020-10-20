@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -134,22 +133,11 @@ const DropDownInfo = [
 
 
 const useStyles = makeStyles(theme => ({
-    appBarStyle: { 
-        width : '80%',
-        height : 40,
-        background : 'white',
-        justifyContent: 'center', 
-        alignItems: 'center',
-        color: grey[900],
-        
-    },
-    MultiTabStyle: {
-        width: 400
-    },
     TextfieldStyle: {
-        width: 500,
+        width: 230,
         height: 25,
-        marginTop: 60,
+        marginLeft: 20,
+        marginTop: 30,
     }
 }));
 
@@ -165,10 +153,9 @@ export default function Dropdown(props) {
             <TextField
                 id="outlined-select-currency"
                 select
-                label="Select"
+                label="Select your Name"
                 value={currency}
                 onChange={handleChange}
-                helperText="Please select your Name"
                 variant="outlined"
                 className={classes.TextfieldStyle}
             >
