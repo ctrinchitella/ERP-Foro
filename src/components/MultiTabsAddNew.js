@@ -6,7 +6,8 @@ import Tab from 'react-bootstrap/Tab';
 import { grey } from '@material-ui/core/colors';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Dropdown from './elements/Dropdown.js';
+import DropdownERP from './elements/DropdownERPs.js';
+import DropdownResources from './elements/DropdownResources.js';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import RadioButtons from './elements/RadioButton.js';
 import db from '../firestore';
@@ -66,69 +67,110 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function MultiTabs() {
+export default function MultiTabs(props) {
     const classes = useStyles();
-    const [ERPAddDoc] = useState();
+    const [ERPAddDoc, setERPAddDoc] = useState('');
+    const [ERPAddQA, setERPAddQA] = useState('');
+    const [ERPAddIssue, setERPAddIssue] = useState('');
+    const [resource, setResource] = useState('');
+    const [fileURL, setFileURL] = useState('');
+    const [filename, setFilename] = useState('');
     const verEquipos = () => {
         var docs = db.collection("equipos").doc("2");
-        docs.get().then(function(doc) {
+        docs.get().then(function (doc) {
             if (doc.exists) {
                 console.log("Document data:", doc.data().nombre);
             } else {
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
     };
-    const handleUploadSuccess = filename => {
-        /*var ERP = "JDE";
-        firebase.storage().ref("files").child(filename).getDownloadURL().then(url =>
-            this.setState({ files: files }));*/
-        firebase.storage().ref("files").child(filename).getDownloadURL().then(url =>
-            Add.addDocument("ERP", "title", "UploadedBy", url));
-            
-            alert("UPLOADED SUCCESSFULLY")
+    const handleUploadSuccess = FN => {
+        setFilename(FN)
+        firebase.storage().ref("files").child(FN).getDownloadURL().then(url =>
+            setFileURL(url));
     };
-    const handleUploadFailed = filename =>{
+    const handleUploadFailed = filename => {
         alert("FAILED TO UPLOAD.")
     }
-    const selectERPDocs = erp =>{
-        alert(erp)
+    const selectERPDocs = erp => {
+        setERPAddDoc(erp)
+    }
+    const selectERPQA = erp => {
+        setERPAddQA(erp)
+    }
+    const selectERPIssue = erp => {
+        setERPAddIssue(erp)
+    }
+    const selectResource = resource => {
+        setResource(resource)
+    }
+    const closeModal = () =>{
+        props.closeModal();
+    }
+    const submitNewFile = () => {
+        var ERP = ERPAddDoc;
+        var Resource = resource;
+        var URL = fileURL;
+        var title = document.getElementById("title").value;
+        if (ERP === "") {
+            alert("ERP is required.")
+        } else {
+            if (title === "") {
+                alert("Title is required.")
+            } else {
+                if (Resource === "") {
+                    alert("Resource is required.")
+                } else {
+                    if (URL === "") {
+                        alert("No File uploaded yet.")
+                    } else {
+                        Add.addDocument(ERP, title, Resource, URL)
+                        props.closeModal();
+                        alert("UPLOADED SUCCESSFULLY!")
+                    }
+                }
+            }
+        }
     }
     return (
         <Tabs defaultActiveKey="Docs" transition={false} id="noanim-tab-example" className={classes.MultiTabStyle}>
             <Tab eventKey="Docs" title="Docs">
-                <Dropdown DefaultERP="JDE" selectERP={selectERPDocs}/>
+                <div className="NetsuiteButtons">
+                    <DropdownERP selectERP={selectERPDocs} />
+                    <TextField id="title" label="Title" variant="outlined" className={classes.CommonText} />
+                </div>
+                <DropdownResources selectResource={selectResource} />
                 <div className={classes.root}>
                     <label><FileUploader
-                   //accept="image/*"
-                   name="avatar"
-                   className={classes.input}
-                   randomizeFilename
-                   hidden
-                   storageRef={firebase.storage().ref("files")}
-                   onUploadSuccess={handleUploadSuccess}
-                   onUploadError ={handleUploadFailed}
-                  />
+                        name="avatar"
+                        className={classes.input}
+                        hidden
+                        storageRef={firebase.storage().ref("files")}
+                        onUploadSuccess={handleUploadSuccess}
+                        onUploadError={handleUploadFailed}
+                    />
                         <Button className={classes.UploadButtonStyle} variant="contained" component="span" startIcon={<CloudUploadIcon />}>
                             Upload
-                    </Button>
+                        </Button>
                     </label>
                 </div>
+                <label>{filename}</label>
                 <div className="AddNewButtons">
-                    <Button variant="contained" className={classes.ButtonStyle}>
-                        Submit
-                </Button>
-                    <Button variant="contained" className={classes.ButtonStyle}>
+                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
+                </Button>
+                <Button variant="contained" onClick={submitNewFile} className={classes.ButtonStyle}>
+                        Submit
                 </Button>
                 </div>
 
             </Tab>
             <Tab eventKey="Q&A" title="Q&A">
                 <div>
-                    <Dropdown />
+                    <DropdownERP selectERP={selectERPQA} />
                     <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
                     <RadioButtons />
                 </div>
@@ -140,18 +182,18 @@ export default function MultiTabs() {
                     defaultValue=""
                     variant="outlined" className={classes.AnswerLineTexts} disabled="true"
                 />
-                <div className="AddNewButtons">
-                    <Button variant="contained" className={classes.ButtonStyle}>
-                        Submit
-                </Button>
-                    <Button variant="contained" className={classes.ButtonStyle}>
+                <div className="AddNewButtons">                    
+                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
+                </Button>
+                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                        Submit
                 </Button>
                 </div>
             </Tab>
             <Tab eventKey="Issue" title="Issues">
                 <div className="NetsuiteButtons">
-                    <Dropdown />
+                    <DropdownERP selectERP={selectERPIssue} />
                     <TextField id="title" label="Title" variant="outlined" className={classes.CommonText} />
                 </div>
                 <TextField
@@ -176,12 +218,12 @@ export default function MultiTabs() {
                     </Button>
                     </label>
                 </div>
-                <div className="AddNewButtons">
-                    <Button variant="contained" className={classes.ButtonStyle}>
-                        Submit
-                </Button>
-                    <Button variant="contained" onClick={verEquipos} className={classes.ButtonStyle}>
+                <div className="AddNewButtons">                   
+                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
+                </Button>
+                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                        Submit
                 </Button>
                 </div>
             </Tab>

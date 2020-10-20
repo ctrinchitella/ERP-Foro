@@ -91,7 +91,7 @@ export default function MediaCard() {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <h2>Add New</h2>
-                        <MultiTabBar/>
+                        <MultiTabBar closeModal={handleClose}/>
                         
                     </div>
                 </Fade>
