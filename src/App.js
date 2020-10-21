@@ -21,7 +21,7 @@ function App() {
       <div id="Home">
         <div className='App'>
             <HeaderBar></HeaderBar>
-            <Carrousel></Carrousel>
+            {/*}<Carrousel></Carrousel>*/}
             <div className='ButtonContainer'
           >
             <div className='Documents'>

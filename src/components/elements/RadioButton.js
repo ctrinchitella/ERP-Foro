@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -7,18 +7,15 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-export default function RadioButtons() {
-    const [value, setValue] = React.useState('');
-    const [error, setError] = React.useState(false);
-    const [setHelperText] = React.useState('Choose wisely');
+export default function RadioButtons(props) {
+    const [value, setValue] = useState('');
     const handleRadioChange = (event) => {
         setValue(event.target.value);
-        setHelperText(' ');
-        setError(false);
+        props.setHasAnswer(event.target.value)
     };
     return (
       <div>
-        <FormControl component="fieldset" error={error} >
+        <FormControl component="fieldset">
             <FormLabel component="legend">Do you have the answer/solution ready?</FormLabel>
             <RadioGroup row aria-label="position" name="position" defaultValue="top" value={value} onChange={handleRadioChange}>
                 <FormControlLabel value="yes" control={<Radio />} label="Yes" labelPlacement="end"/>

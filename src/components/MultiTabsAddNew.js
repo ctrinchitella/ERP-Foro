@@ -10,7 +10,6 @@ import DropdownERP from './elements/DropdownERPs.js';
 import DropdownResources from './elements/DropdownResources.js';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import RadioButtons from './elements/RadioButton.js';
-import db from '../firestore';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import Add from './DB/Add';
@@ -36,11 +35,17 @@ const useStyles = makeStyles(theme => ({
         height: 100,
         marginBottom: 20
     },
-    CommonText: {
+    TitleIssue:{        
         width: 230,
         height: 25,
         marginLeft: 20,
         marginTop: 30,
+    },
+    CommonText: {
+        
+        width: 500,
+        height: 25,
+        marginTop: 60,
     },
     UploadButtonStyle: {
         backgroundColor: grey[900],
@@ -73,24 +78,22 @@ export default function MultiTabs(props) {
     const [ERPAddQA, setERPAddQA] = useState('');
     const [ERPAddIssue, setERPAddIssue] = useState('');
     const [resource, setResource] = useState('');
+    const [resourceQA, setResourceQA] = useState('');
     const [fileURL, setFileURL] = useState('');
     const [filename, setFilename] = useState('');
-    const verEquipos = () => {
-        var docs = db.collection("equipos").doc("2");
-        docs.get().then(function (doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data().nombre);
-            } else {
-                console.log("No such document!");
-            }
-        }).catch(function (error) {
-            console.log("Error getting document:", error);
-        });
-    };
-    const handleUploadSuccess = FN => {
+    const [issueURL, setIssueURL] = useState('');
+    const [issuename, setIssueName] = useState('');
+    const [hasAnswer, setHasAnswer] = useState('');
+
+    const handleUploadDocSuccess = FN => {
         setFilename(FN)
         firebase.storage().ref("files").child(FN).getDownloadURL().then(url =>
             setFileURL(url));
+    };
+    const handleUploadIssueSuccess = FN => {
+        setIssueName(FN)
+        firebase.storage().ref("issues").child(FN).getDownloadURL().then(url =>
+            setIssueURL(url));
     };
     const handleUploadFailed = filename => {
         alert("FAILED TO UPLOAD.")
@@ -107,14 +110,26 @@ export default function MultiTabs(props) {
     const selectResource = resource => {
         setResource(resource)
     }
-    const closeModal = () =>{
+    const selectResourceQA = resourceQA => {
+        setResourceQA(resourceQA)
+    }
+    const setHasAnswerSelected = value => {
+        setHasAnswer(value)
+        if (value === "no") {
+            document.getElementById("answerContent").style.display = "none";
+        } else {
+            document.getElementById("answerContent").style.display = "block";
+        }
+
+    }
+    const closeModal = () => {
         props.closeModal();
     }
     const submitNewFile = () => {
         var ERP = ERPAddDoc;
         var Resource = resource;
         var URL = fileURL;
-        var title = document.getElementById("title").value;
+        var title = document.getElementById("titleDoc").value;
         if (ERP === "") {
             alert("ERP is required.")
         } else {
@@ -135,21 +150,81 @@ export default function MultiTabs(props) {
             }
         }
     }
+    const submitNewIssue = () => {
+        var ERP = ERPAddIssue;
+        var URL = issueURL;
+        var title = document.getElementById("titleIssue").value;
+        var Description = document.getElementById("descriptionIssue").value;
+        if (ERP === "") {
+            alert("ERP is required.")
+        } else {
+            if (title === "") {
+                alert("Title is required.")
+            } else {
+                if (Description === "") {
+                    alert("Description is required.")
+                } else {
+                    if (URL === "") {
+                        alert("No File uploaded yet.")
+                    } else {
+                        Add.addIssue(ERP, title, Description, URL)
+                        props.closeModal();
+                        alert("UPLOADED SUCCESSFULLY!")
+                    }
+                }
+            }
+        }
+    }
+    const submitQA = () => {
+        var ERP = ERPAddQA;
+        var Resource = resourceQA;
+        var question = document.getElementById("question").value;
+        var answer = document.getElementById("answer").value;
+        if (ERP === "") {
+            alert("ERP is required.")
+        } else {
+            if (Resource === "") {
+                alert("Resource is required.")
+            } else {
+                if (question === "") {
+                    alert("Question is required.")
+                } else {
+                    if (hasAnswer === "") {
+                        alert("Do you have answer?")
+                    } else {
+                        if (hasAnswer === "yes") {
+                            if (answer === "") {
+                                alert("Answer is required.")
+                            } else {
+                                Add.addQA(ERP, question, Resource, 1, answer, Resource);
+                                props.closeModal();
+                                alert("UPLOADED SUCCESSFULLY!");
+                            }
+                        } else {
+                            Add.addQA(ERP, question, Resource, 0, "", "");
+                            props.closeModal();
+                            alert("UPLOADED SUCCESSFULLY!");
+                        }
+                    }
+                }
+            }
+        }
+    }
     return (
         <Tabs defaultActiveKey="Docs" transition={false} id="noanim-tab-example" className={classes.MultiTabStyle}>
             <Tab eventKey="Docs" title="Docs">
                 <div className="NetsuiteButtons">
-                    <DropdownERP selectERP={selectERPDocs} />
-                    <TextField id="title" label="Title" variant="outlined" className={classes.CommonText} />
-                </div>
+                    <DropdownERP selectERP={selectERPDocs} />                   
                 <DropdownResources selectResource={selectResource} />
+                </div>
+                <TextField id="titleDoc" label="Title" variant="outlined" className={classes.CommonText} />
                 <div className={classes.root}>
                     <label><FileUploader
                         name="avatar"
                         className={classes.input}
                         hidden
                         storageRef={firebase.storage().ref("files")}
-                        onUploadSuccess={handleUploadSuccess}
+                        onUploadSuccess={handleUploadDocSuccess}
                         onUploadError={handleUploadFailed}
                     />
                         <Button className={classes.UploadButtonStyle} variant="contained" component="span" startIcon={<CloudUploadIcon />}>
@@ -159,34 +234,37 @@ export default function MultiTabs(props) {
                 </div>
                 <label>{filename}</label>
                 <div className="AddNewButtons">
-                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                    <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
-                <Button variant="contained" onClick={submitNewFile} className={classes.ButtonStyle}>
+                    <Button variant="contained" onClick={submitNewFile} className={classes.ButtonStyle}>
                         Submit
                 </Button>
                 </div>
 
             </Tab>
             <Tab eventKey="Q&A" title="Q&A">
-                <div>
+            <div className="NetsuiteButtons">
                     <DropdownERP selectERP={selectERPQA} />
-                    <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
-                    <RadioButtons />
+                    <DropdownResources selectResource={selectResourceQA} />                    
                 </div>
-                <TextField
-                    id="Answer"
-                    label="Answer"
-                    multiline
-                    rows={4}
-                    defaultValue=""
-                    variant="outlined" className={classes.AnswerLineTexts} disabled="true"
-                />
-                <div className="AddNewButtons">                    
-                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                    <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
+                    <RadioButtons setHasAnswer={setHasAnswerSelected} />
+                <div style={{ display: 'none' }} id="answerContent">
+                    <TextField
+                        id="answer"
+                        label="Answer"
+                        multiline
+                        rows={4}
+                        defaultValue=""
+                        variant="outlined" className={classes.AnswerLineTexts}
+                    />
+                </div>
+                <div className="AddNewButtons">
+                    <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
-                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                    <Button variant="contained" onClick={submitQA} className={classes.ButtonStyle}>
                         Submit
                 </Button>
                 </div>
@@ -194,10 +272,10 @@ export default function MultiTabs(props) {
             <Tab eventKey="Issue" title="Issues">
                 <div className="NetsuiteButtons">
                     <DropdownERP selectERP={selectERPIssue} />
-                    <TextField id="title" label="Title" variant="outlined" className={classes.CommonText} />
+                    <TextField id="titleIssue" label="Title" variant="outlined" className={classes.TitleIssue} />
                 </div>
                 <TextField
-                    id="outlined-multiline-static"
+                    id="descriptionIssue"
                     label="Description"
                     multiline
                     rows={4}
@@ -205,24 +283,25 @@ export default function MultiTabs(props) {
                     variant="outlined" className={classes.MultiLineTexts}
                 />
                 <div className={classes.root}>
-                    <input
-                        accept="image/*"
+                    <label><FileUploader
+                        name="avatar"
                         className={classes.input}
-                        id="contained-button-file"
-                        multiple
-                        type="file"
+                        hidden
+                        storageRef={firebase.storage().ref("issues")}
+                        onUploadSuccess={handleUploadIssueSuccess}
+                        onUploadError={handleUploadFailed}
                     />
-                    <label htmlFor="contained-button-file">
                         <Button className={classes.UploadButtonStyle} variant="contained" component="span" startIcon={<CloudUploadIcon />}>
                             Upload
-                    </Button>
+                        </Button>
                     </label>
                 </div>
-                <div className="AddNewButtons">                   
-                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                <label>{issuename}</label>
+                <div className="AddNewButtons">
+                    <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
-                <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
+                    <Button variant="contained" onClick={submitNewIssue} className={classes.ButtonStyle}>
                         Submit
                 </Button>
                 </div>
