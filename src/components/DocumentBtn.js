@@ -13,6 +13,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
 import db from '../firestore';
 
 const useStyles = makeStyles(theme => ({
@@ -54,6 +55,12 @@ const useStyles = makeStyles(theme => ({
     },
     table: {
         minWidth: 800,
+    },
+     ButtonStyle: {
+        backgroundColor: grey[900],
+        color: 'white',
+        width: 150,
+        height: 40,
     },
 }));
 
@@ -120,7 +127,7 @@ export default function MediaCard() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <Paper>
+                        <Paper style={{ width: 900}}>
                             <div>
                                 <h2>Documents</h2>
                             </div>
@@ -131,8 +138,14 @@ export default function MediaCard() {
                                     }
                                 }} pageSize={10} disableMultipleSelection={true} hideFooterSelectedRowCount />
                             </div>
-                        </Paper>
+                            <div style={{ width: '100%', marginTop: 10}}>
+                            <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
+                                    Cancel
+                                </Button>
+                            </div>
+                        </Paper>                               
                     </div>
+                    
                 </Fade>
             </Modal>            
         </div>
