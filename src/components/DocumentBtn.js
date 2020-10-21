@@ -58,10 +58,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const columns = [
-    { field: 'ERP', headerName: 'ERP', width: 120},
+    { field: 'ERP', headerName: 'ERP', width: 120 },
     { field: 'Title', headerName: 'Title', width: 200 },
     { field: 'Date', headerName: 'Uploaded Date', width: 200 },
-    { field: 'Resource', headerName: 'Uploaded By', width: 200 },    
+    { field: 'Resource', headerName: 'Uploaded By', width: 200 },
 ];
 
 
@@ -74,9 +74,9 @@ export default function MediaCard() {
     const handleOpen = () => {
         var files = db.collection("files")
         files.onSnapshot((snapShots) => {
-            setRows( snapShots.docs.map(doc => {
-                    return { id: doc.id, url: doc.data().FileID, ERP: doc.data().ERP, Title: doc.data().Title, Date: doc.data().Date.substring(8, 10)+":"+doc.data().Date.substring(10, 12)+" "+doc.data().Date.substring(6, 8)+"-"+doc.data().Date.substring(4, 6)+"-"+doc.data().Date.substring(0, 4), Resource: doc.data().UploadedBy }
-                })
+            setRows(snapShots.docs.map(doc => {
+                return { id: doc.id, url: doc.data().FileID, ERP: doc.data().ERP, Title: doc.data().Title, Time: doc.data().Date.substring(8, 10) + ":" + doc.data().Date.substring(10, 12), Date: doc.data().Date.substring(6, 8) + "-" + doc.data().Date.substring(4, 6) + "-" + doc.data().Date.substring(0, 4), Resource: doc.data().UploadedBy }
+            })
             )
         }, error => {
             console.log(error)
@@ -87,7 +87,6 @@ export default function MediaCard() {
     const handleClose = () => {
         setOpen(false);
     };
-
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <Card className={classes.root} onClick={handleOpen}>
@@ -126,12 +125,16 @@ export default function MediaCard() {
                                 <h2>Documents</h2>
                             </div>
                             <div style={{ height: 400, width: '100%', verticalalign: 'middle', marginTop: 40 }}>
-                                <DataGrid rows={rows} columns={columns} pageSize={5} disableMultipleSelection={true}/>
+                                <DataGrid rows={rows} columns={columns} onSelectionChange={(data) => {
+                                    if (data.rows[0] !== undefined) {
+                                        document.location.href = data.rows[0].url
+                                    }
+                                }} pageSize={10} disableMultipleSelection={true} hideFooterSelectedRowCount />
                             </div>
                         </Paper>
                     </div>
                 </Fade>
-            </Modal>
+            </Modal>            
         </div>
     );
 }

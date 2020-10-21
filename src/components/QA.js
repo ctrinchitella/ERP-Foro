@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -17,8 +17,10 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Avatar from '@material-ui/core/Avatar';
+import DropdownResources from './elements/DropdownResources.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
+import db from '../firestore';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,63 +59,50 @@ const useStyles = makeStyles(theme => ({
     subheader: {
         backgroundColor: theme.palette.background.paper,
     },
-    appBar: {
-        top: 'auto',
-        bottom: 0,
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    fabButton: {
-        position: 'absolute',
-        zIndex: 1,
-        top: -30,
-        left: 0,
-        right: 0,
-        margin: '0 auto',
-    },
 }));
 
-const messages = [
-    {
-        id: 1,
-        primary: 'Tokens?',
-        secondary: "How can I generate new Tokens in NS",
-        person: '/static/images/avatar/5.jpg',
-    },
-    {
-        id: 2,
-        primary: 'Default Info',
-        secondary: `Which  default information should I send into an oracle cloud service`,
-        person: '/static/images/avatar/1.jpg',
-    },
-    {
-        id: 3,
-        primary: 'JDE Table',
-        secondary: 'How can I register a JDE table in MEP to see? Also I can I create a view in SQL joinin different tables?',
-        person: '/static/images/avatar/2.jpg',
-    },
-    {
-        id: 4,
-        primary: 'Best Practices',
-        secondary: 'What are the best practices to use JD Edwards tables in DSI?',
-        person: '/static/images/avatar/3.jpg',
-    }
-];
+
 
 
 export default function MediaCard() {
     const classes = useStyles();
-
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [openAnswer, setOpenAnswer] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const [resource, setResource] = useState('');
+    const [selectedIndex, setSelectedIndex] = useState(1);
 
     const handleOpen = () => {
+        var questions = db.collection("questions")
+        questions.onSnapshot((snapShots) => {
+            setQuestions(snapShots.docs.map(doc => {
+                return { id: doc.id, question: doc.data().Question, answer: doc.data().Answer, questionedby: doc.data().QuestionedBy, answeredby: doc.data().answeredBy, time: doc.data().Date.substring(8, 10) + ":" + doc.data().Date.substring(10, 12), date: doc.data().Date.substring(6, 8) + "-" + doc.data().Date.substring(4, 6) + "-" + doc.data().Date.substring(0, 4), ERP: doc.data().ERP }
+            })
+            )
+        }, error => {
+            console.log(error)
+        });
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleListItemClick = (event, index) => {
+        setSelectedIndex(index);
+        handleOpenAnswer()
+    };
+
+    const handleOpenAnswer = () => {
+        setOpenAnswer(true);
+    };
+    const handleCloseAnswer = () => {
+        setOpenAnswer(false);
+    };
+    const selectResource = resource => {
+        setResource(resource)
+    }
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <Card className={classes.root} onClick={handleOpen}>
@@ -154,23 +143,49 @@ export default function MediaCard() {
                         </div>
                         <React.Fragment>
                             <CssBaseline />
-                            <Paper square className={classes.paper}>
+                            <Paper square className={classes.paper} style={{ width: 800, maxHeight: 400, overflow: 'auto' }}>
                                 <List className={classes.list}>
-                                    {messages.map(({ id, primary, secondary, person }) => (
+                                    {questions.map(({ id, question, answer, questionedby, answeredby }) => (
                                         <React.Fragment key={id}>
                                             {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
                                             {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
-                                            <ListItem button>
+                                            <ListItem button selected={selectedIndex === id} onClick={(event) => handleListItemClick(event, id)}>
                                                 <ListItemAvatar>
-                                                    <Avatar alt="Profile Picture" src={person} />
+                                                    <Avatar alt={questionedby} src={questionedby} />
                                                 </ListItemAvatar>
-                                                <ListItemText primary={primary} secondary={secondary} />
+                                                <ListItemText
+                                                    primary={question}
+                                                    secondary={
+                                                        <React.Fragment>
+                                                            {answer} - {answeredby}
+                                                        </React.Fragment>
+                                                    }
+                                                />
                                             </ListItem>
                                         </React.Fragment>
                                     ))}
                                 </List>
                             </Paper>
                         </React.Fragment>
+                    </div>
+                </Fade>
+            </Modal>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={openAnswer}
+                onClose={handleCloseAnswer}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={openAnswer}>
+                    <div className={classes.paper}>
+                        <h2>Answer</h2>
+                        <DropdownResources selectResource={selectResource} />
                     </div>
                 </Fade>
             </Modal>

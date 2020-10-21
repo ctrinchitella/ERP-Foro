@@ -108,6 +108,7 @@ export default function MediaCard() {
                                     id="panel1a-header"
                                 >
                                     <Typography className={classes.heading}>NS:Invalid Login Attempt</Typography>
+                                    <Typography className={classes.heading}>NS:Invalid Login Attempt</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Typography>
