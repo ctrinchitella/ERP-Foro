@@ -14,7 +14,7 @@ import JDELogo from './imgs/Jd-Edwards-Logo.jpg';
 import SAPLogo from './imgs/SAP-Logo.png';
 import OCLogo from './imgs/OC-Logo.png';
 
-function App() {
+function App() { 
   
   return (
     <view style={{ flex: 1, scrollBehavior: "smooth" }}>

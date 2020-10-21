@@ -36,4 +36,4 @@ addDocument = (ERP, title, UploadedBy, FileID) => {
     })
 }
 }
-export default new Add();
+export default new Add(); 
