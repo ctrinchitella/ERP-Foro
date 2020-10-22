@@ -196,12 +196,12 @@ export default function MultiTabs(props) {
                             if (answer === "") {
                                 alert("Answer is required.")
                             } else {
-                                Add.addQA(ERP, question, Resource, 1, answer, Resource);
+                                Add.addQA(ERP, question, Resource, true, answer, Resource);
                                 props.closeModal();
                                 alert("UPLOADED SUCCESSFULLY!");
                             }
                         } else {
-                            Add.addQA(ERP, question, Resource, 0, "", "");
+                            Add.addQA(ERP, question, Resource, false, "", "");
                             props.closeModal();
                             alert("UPLOADED SUCCESSFULLY!");
                         }
