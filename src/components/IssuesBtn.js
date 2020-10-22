@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import BugReportIcon from '@material-ui/icons/BugReport';
-import { grey } from '@material-ui/core/colors';
+import { grey, cyan } from '@material-ui/core/colors';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     modal: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
@@ -96,7 +96,7 @@ export default function MediaCard() {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
+                    <div className={classes.paper} style={{width: '50%'}}>
                         <div>
                             <h2>Issues</h2>
                         </div>
@@ -107,45 +107,56 @@ export default function MediaCard() {
                                     aria-controls="panel1a-content"
                                     id="panel1a-header"
                                 >
-                                    <Typography className={classes.heading}>NS:Invalid Login Attempt</Typography>
-                                    <Typography className={classes.heading}>NS:Invalid Login Attempt</Typography>
+                                    <Typography className={classes.heading} style={{color: cyan[600], width:'15%', alignItems:'right'}}>Netsuite</Typography>
+                                    <Typography className={classes.heading} style={{width: '50%'}}>Cannot see registered tables</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                        sit amet blandit leo lobortis eget.
-          </Typography>
+                                    <Typography style={{width: '100%'}}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                    </Typography>
                                 </AccordionDetails>
+                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}>NetsuiteTokens.docx</Typography>
                             </Accordion>
                             <Accordion>
-                                <AccordionSummary
+                            <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel2a-content"
-                                    id="panel2a-header"
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
                                 >
-                                    <Typography className={classes.heading}>JDE:Cannot see registered tables</Typography>
+                                    <Typography className={classes.heading} style={{color: cyan[600], width:'15%', alignItems:'right'}}>JDE</Typography>
+                                    <Typography className={classes.heading} style={{width: '50%'}}>Cannot see registered tables</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                        sit amet blandit leo lobortis eget.
-          </Typography>
+                                    <Typography style={{width: '100%'}}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                    </Typography>
                                 </AccordionDetails>
+                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}>NetsuiteTokens.docx</Typography>
                             </Accordion>
                             <Accordion>
-                                <AccordionSummary
+                            <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel3a-content"
-                                    id="panel3a-header"
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
                                 >
-                                    <Typography className={classes.heading}>OC:Service calll "Unauthorized Access"</Typography>
+                                    <Typography className={classes.heading} style={{color: cyan[600], width:'15%', alignItems:'right'}}>Oracle Cloud</Typography>
+                                    <Typography className={classes.heading} style={{width: '50%'}}>Service Calls are failing</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                        sit amet blandit leo lobortis eget.
-          </Typography>
+                                    <Typography style={{width: '100%'}}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                    </Typography>
                                 </AccordionDetails>
+                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}>NetsuiteTokens.docx</Typography>
                             </Accordion>
                         </div>
                     </div>
