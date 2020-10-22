@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         marginLeft: 20,
         width: 150,
-        height: 40
+        height: 40,
     },
     QuestionText: {
         width: 400,
@@ -129,6 +129,7 @@ export default function MultiTabs(props) {
         var ERP = ERPAddDoc;
         var Resource = resource;
         var URL = fileURL;
+        var Filename = filename;
         var title = document.getElementById("titleDoc").value;
         if (ERP === "") {
             alert("ERP is required.")
@@ -142,7 +143,7 @@ export default function MultiTabs(props) {
                     if (URL === "") {
                         alert("No File uploaded yet.")
                     } else {
-                        Add.addDocument(ERP, title, Resource, URL)
+                        Add.addDocument(ERP, title, Resource, URL, Filename)
                         props.closeModal();
                         alert("UPLOADED SUCCESSFULLY!")
                     }
@@ -153,6 +154,7 @@ export default function MultiTabs(props) {
     const submitNewIssue = () => {
         var ERP = ERPAddIssue;
         var URL = issueURL;
+        var issueName = issuename;
         var title = document.getElementById("titleIssue").value;
         var Description = document.getElementById("descriptionIssue").value;
         if (ERP === "") {
@@ -167,7 +169,7 @@ export default function MultiTabs(props) {
                     if (URL === "") {
                         alert("No File uploaded yet.")
                     } else {
-                        Add.addIssue(ERP, title, Description, URL)
+                        Add.addIssue(ERP, title, Description, URL, issueName)
                         props.closeModal();
                         alert("UPLOADED SUCCESSFULLY!")
                     }
@@ -233,7 +235,7 @@ export default function MultiTabs(props) {
                     </label>
                 </div>
                 <label>{filename}</label>
-                <div className="AddNewButtons">
+                <div style={{ width: 500, paddingLeft: 300}} className="AddNewButtons">
                     <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
@@ -260,7 +262,7 @@ export default function MultiTabs(props) {
                         variant="outlined" className={classes.AnswerLineTexts}
                     />
                 </div>
-                <div className="AddNewButtons">
+                <div style={{ width: 500, paddingLeft: 300}} className="AddNewButtons">
                     <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
@@ -297,7 +299,7 @@ export default function MultiTabs(props) {
                     </label>
                 </div>
                 <label>{issuename}</label>
-                <div className="AddNewButtons">
+                <div style={{ width: 500, paddingLeft: 300}} className="AddNewButtons">
                     <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>

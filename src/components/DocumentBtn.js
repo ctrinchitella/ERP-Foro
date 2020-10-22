@@ -61,6 +61,8 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         width: 150,
         height: 40,
+        marginTop: 15,
+        float: 'right',
     },
 }));
 
@@ -138,9 +140,9 @@ export default function MediaCard() {
                                     }
                                 }} pageSize={10} disableMultipleSelection={true} hideFooterSelectedRowCount />
                             </div>
-                            <div style={{ width: '100%', marginTop: 10}}>
-                            <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
-                                    Cancel
+                            <div>
+                                <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
+                                Close
                                 </Button>
                             </div>
                         </Paper>                               

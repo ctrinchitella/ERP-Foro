@@ -75,9 +75,10 @@ const useStyles = makeStyles(theme => ({
     }, ButtonStyle: {
         backgroundColor: grey[900],
         color: 'white',
-        marginLeft: 20,
         width: 150,
-        height: 40
+        height: 40,
+        marginTop: 15,
+        float: 'right',
     },
 }));
 
@@ -206,9 +207,9 @@ export default function MediaCard() {
                                     ))}
                                 </List>
                             </Paper>
-                            <div className="AddNewButtons">
+                            <div>
                                 <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
-                                    Cancel
+                                Close
                                 </Button>
                             </div>
                         </React.Fragment>
