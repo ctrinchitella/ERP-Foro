@@ -67,7 +67,7 @@ export default function MediaCard() {
 
     const [open, setOpen] = useState(false);
     const [issues, setIssues] = useState([]);
-    const [expanded, setExpanded] = React.useState();
+    const [expanded, setExpanded] = useState();
 
     const handleOpen = () => {
         var issues = db.collection("issues")
@@ -119,11 +119,11 @@ export default function MediaCard() {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper} style={{width: '50%'}}>
+                <div className={classes.paper} style={{width: '50%', height: '90%'}}>
                         <div>
                             <h2>Issues</h2>
                         </div>
-                        <div className={classes.paper}>
+                        <div className={classes.paper} style={{height: '80%', overflow: 'auto'}}>
                         {issues.map(({ id,url,filename, ERP, Title, Description, Time, Date }) => <Accordion square expanded={expanded === id} onChange={handleChange(id)}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}

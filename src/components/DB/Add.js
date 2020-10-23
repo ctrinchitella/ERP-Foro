@@ -54,20 +54,40 @@ addIssue = (ERP, title, description, FileID, issueName) => {
 }
 addQA = (ERP, question,questionedBy, hasAnswer, answer, answeredBy) => {    
     var ActualDate = this.concatenatedDate();
-    db.collection("questions").doc("Q"+ActualDate).set({
-        ERP: ERP,
-        Question: question,
-        HasAnswer: hasAnswer,
-        Answer: answer,
-        QuestionedBy: questionedBy,
-        Date: this.concatenatedDate(),
-        answeredBy:answeredBy,
-    }).then(() => {
-        console.log("File Uploaded Successfully!")
-    }).catch(() => {
-        console.log("error")
-        return ("error")
-    })
+    if(hasAnswer){
+        db.collection("questions").doc("Q"+ActualDate).set({
+            ERP: ERP,
+            Question: question,
+            HasAnswer: hasAnswer,
+            Answer: answer,
+            QuestionedBy: questionedBy,
+            questionedDate: this.concatenatedDate(),
+            answeredDate: this.concatenatedDate(),
+            answeredBy:answeredBy,
+        }).then(() => {
+            console.log("File Uploaded Successfully!")
+        }).catch(() => {
+            console.log("error")
+            return ("error")
+        })
+    }else{
+        db.collection("questions").doc("Q"+ActualDate).set({
+            ERP: ERP,
+            Question: question,
+            HasAnswer: hasAnswer,
+            Answer: answer,
+            QuestionedBy: questionedBy,
+            questionedDate: this.concatenatedDate(),
+            answeredDate: "",
+            answeredBy:answeredBy,
+        }).then(() => {
+            console.log("File Uploaded Successfully!")
+        }).catch(() => {
+            console.log("error")
+            return ("error")
+        }) 
+    }
+    
 }
 }
 export default new Add(); 

@@ -14,7 +14,7 @@ import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import Add from './DB/Add';
 
- 
+
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: 30
@@ -35,14 +35,14 @@ const useStyles = makeStyles(theme => ({
         height: 100,
         marginBottom: 20
     },
-    TitleIssue:{        
+    TitleIssue: {
         width: 230,
         height: 25,
         marginLeft: 20,
         marginTop: 30,
     },
     CommonText: {
-        
+
         width: 500,
         height: 25,
         marginTop: 60,
@@ -77,7 +77,7 @@ export default function MultiTabs(props) {
     const [ERPAddDoc, setERPAddDoc] = useState('');
     const [ERPAddQA, setERPAddQA] = useState('');
     const [ERPAddIssue, setERPAddIssue] = useState('');
-    const [resource, setResource] = useState('');
+    const [resourceDoc, setResourceDoc] = useState('');
     const [resourceQA, setResourceQA] = useState('');
     const [fileURL, setFileURL] = useState('');
     const [filename, setFilename] = useState('');
@@ -108,7 +108,7 @@ export default function MultiTabs(props) {
         setERPAddIssue(erp)
     }
     const selectResource = resource => {
-        setResource(resource)
+        setResourceDoc(resource)
     }
     const selectResourceQA = resourceQA => {
         setResourceQA(resourceQA)
@@ -127,18 +127,18 @@ export default function MultiTabs(props) {
     }
     const submitNewFile = () => {
         var ERP = ERPAddDoc;
-        var Resource = resource;
+        var Resource = resourceDoc;
         var URL = fileURL;
         var Filename = filename;
         var title = document.getElementById("titleDoc").value;
         if (ERP === "") {
             alert("ERP is required.")
         } else {
-            if (title === "") {
-                alert("Title is required.")
+            if (Resource === "") {
+                alert("Please select your name.")
             } else {
-                if (Resource === "") {
-                    alert("Resource is required.")
+                if (title === "") {
+                    alert("Title is required.")
                 } else {
                     if (URL === "") {
                         alert("No File uploaded yet.")
@@ -186,7 +186,7 @@ export default function MultiTabs(props) {
             alert("ERP is required.")
         } else {
             if (Resource === "") {
-                alert("Resource is required.")
+                alert("Please select your name.")
             } else {
                 if (question === "") {
                     alert("Question is required.")
@@ -216,8 +216,8 @@ export default function MultiTabs(props) {
         <Tabs defaultActiveKey="Docs" transition={false} id="noanim-tab-example" className={classes.MultiTabStyle}>
             <Tab eventKey="Docs" title="Docs">
                 <div className="NetsuiteButtons">
-                    <DropdownERP selectERP={selectERPDocs} />                   
-                <DropdownResources selectResource={selectResource} />
+                    <DropdownERP selectERP={selectERPDocs} />
+                    <DropdownResources selectResource={selectResource} />
                 </div>
                 <TextField id="titleDoc" label="Title" variant="outlined" className={classes.CommonText} />
                 <div className={classes.root}>
@@ -235,7 +235,7 @@ export default function MultiTabs(props) {
                     </label>
                 </div>
                 <label>{filename}</label>
-                <div style={{ width: 500, paddingLeft: 300}} className="AddNewButtons">
+                <div style={{ width: 500, paddingLeft: 300 }} className="AddNewButtons">
                     <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
@@ -246,12 +246,12 @@ export default function MultiTabs(props) {
 
             </Tab>
             <Tab eventKey="Q&A" title="Q&A">
-            <div className="NetsuiteButtons">
+                <div className="NetsuiteButtons">
                     <DropdownERP selectERP={selectERPQA} />
-                    <DropdownResources selectResource={selectResourceQA} />                    
+                    <DropdownResources selectResource={selectResourceQA} />
                 </div>
-                    <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
-                    <RadioButtons setHasAnswer={setHasAnswerSelected} />
+                <TextField id="question" label="Question" variant="outlined" className={classes.QuestionText} />
+                <RadioButtons setHasAnswer={setHasAnswerSelected} />
                 <div style={{ display: 'none' }} id="answerContent">
                     <TextField
                         id="answer"
@@ -262,7 +262,7 @@ export default function MultiTabs(props) {
                         variant="outlined" className={classes.AnswerLineTexts}
                     />
                 </div>
-                <div style={{ width: 500, paddingLeft: 300}} className="AddNewButtons">
+                <div style={{ width: 500, paddingLeft: 300 }} className="AddNewButtons">
                     <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
@@ -299,7 +299,7 @@ export default function MultiTabs(props) {
                     </label>
                 </div>
                 <label>{issuename}</label>
-                <div style={{ width: 500, paddingLeft: 300}} className="AddNewButtons">
+                <div style={{ width: 500, paddingLeft: 300 }} className="AddNewButtons">
                     <Button variant="contained" onClick={closeModal} className={classes.ButtonStyle}>
                         Cancel
                 </Button>
