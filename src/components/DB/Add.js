@@ -20,7 +20,7 @@ class Add extends React.Component {
         var seconds = dateNow.getSeconds();
         return year + month + day + hours + minutes + seconds;
     }
-addDocument = (ERP, title, UploadedBy, FileID) => {    
+addDocument = (ERP, title, UploadedBy, FileID, filename) => {    
     var ActualDate = this.concatenatedDate();
     db.collection("files").doc("F"+ActualDate).set({
         ERP: ERP,
@@ -28,6 +28,7 @@ addDocument = (ERP, title, UploadedBy, FileID) => {
         Date: this.concatenatedDate(),
         UploadedBy: UploadedBy,
         FileID: FileID,
+        FileName: filename,
     }).then(() => {
         console.log("File Uploaded Successfully!")
     }).catch(() => {
@@ -35,7 +36,7 @@ addDocument = (ERP, title, UploadedBy, FileID) => {
         return ("error")
     })
 }
-addIssue = (ERP, title, description, FileID) => {    
+addIssue = (ERP, title, description, FileID, issueName) => {    
     var ActualDate = this.concatenatedDate();
     db.collection("issues").doc("I"+ActualDate).set({
         ERP: ERP,
@@ -43,6 +44,7 @@ addIssue = (ERP, title, description, FileID) => {
         Date: this.concatenatedDate(),
         Description: description,
         FileID: FileID,
+        FileName: issueName,
     }).then(() => {
         console.log("File Uploaded Successfully!")
     }).catch(() => {
@@ -52,20 +54,40 @@ addIssue = (ERP, title, description, FileID) => {
 }
 addQA = (ERP, question,questionedBy, hasAnswer, answer, answeredBy) => {    
     var ActualDate = this.concatenatedDate();
-    db.collection("questions").doc("Q"+ActualDate).set({
-        ERP: ERP,
-        Question: question,
-        HasAnswer: hasAnswer,
-        Answer: answer,
-        QuestionedBy: questionedBy,
-        Date: this.concatenatedDate(),
-        answeredBy:answeredBy,
-    }).then(() => {
-        console.log("File Uploaded Successfully!")
-    }).catch(() => {
-        console.log("error")
-        return ("error")
-    })
+    if(hasAnswer){
+        db.collection("questions").doc("Q"+ActualDate).set({
+            ERP: ERP,
+            Question: question,
+            HasAnswer: hasAnswer,
+            Answer: answer,
+            QuestionedBy: questionedBy,
+            questionedDate: this.concatenatedDate(),
+            answeredDate: this.concatenatedDate(),
+            answeredBy:answeredBy,
+        }).then(() => {
+            console.log("File Uploaded Successfully!")
+        }).catch(() => {
+            console.log("error")
+            return ("error")
+        })
+    }else{
+        db.collection("questions").doc("Q"+ActualDate).set({
+            ERP: ERP,
+            Question: question,
+            HasAnswer: hasAnswer,
+            Answer: answer,
+            QuestionedBy: questionedBy,
+            questionedDate: this.concatenatedDate(),
+            answeredDate: "",
+            answeredBy:answeredBy,
+        }).then(() => {
+            console.log("File Uploaded Successfully!")
+        }).catch(() => {
+            console.log("error")
+            return ("error")
+        }) 
+    }
+    
 }
 }
 export default new Add(); 

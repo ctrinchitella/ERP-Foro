@@ -61,14 +61,17 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         width: 150,
         height: 40,
+        marginTop: 15,
+        float: 'right',
     },
 }));
 
 const columns = [
-    { field: 'ERP', headerName: 'ERP', width: 120 },
-    { field: 'Title', headerName: 'Title', width: 200 },
-    { field: 'Date', headerName: 'Uploaded Date', width: 200 },
+    { field: 'ERP', headerName: 'ERP', width: 115 },
+    { field: 'Title', headerName: 'Title', width: 185 },
+    { field: 'Date', headerName: 'Uploaded Date', width: 130 },
     { field: 'Resource', headerName: 'Uploaded By', width: 200 },
+    { field: 'FileName', headerName: 'File', width: 200 },
 ];
 
 
@@ -82,7 +85,7 @@ export default function MediaCard() {
         var files = db.collection("files")
         files.onSnapshot((snapShots) => {
             setRows(snapShots.docs.map(doc => {
-                return { id: doc.id, url: doc.data().FileID, ERP: doc.data().ERP, Title: doc.data().Title, Time: doc.data().Date.substring(8, 10) + ":" + doc.data().Date.substring(10, 12), Date: doc.data().Date.substring(6, 8) + "-" + doc.data().Date.substring(4, 6) + "-" + doc.data().Date.substring(0, 4), Resource: doc.data().UploadedBy }
+                return { id: doc.id, url: doc.data().FileID, ERP: doc.data().ERP, FileName: doc.data().FileName, Title: doc.data().Title, Time: doc.data().Date.substring(8, 10) + ":" + doc.data().Date.substring(10, 12), Date: doc.data().Date.substring(6, 8) + "-" + doc.data().Date.substring(4, 6) + "-" + doc.data().Date.substring(0, 4), Resource: doc.data().UploadedBy }
             })
             )
         }, error => {
@@ -138,9 +141,9 @@ export default function MediaCard() {
                                     }
                                 }} pageSize={10} disableMultipleSelection={true} hideFooterSelectedRowCount />
                             </div>
-                            <div style={{ width: '100%', marginTop: 10}}>
-                            <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
-                                    Cancel
+                            <div>
+                                <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
+                                Close
                                 </Button>
                             </div>
                         </Paper>                               

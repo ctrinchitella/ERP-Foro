@@ -7,19 +7,15 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import { grey } from '@material-ui/core/colors';
+import { grey, cyan } from '@material-ui/core/colors';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Avatar from '@material-ui/core/Avatar';
 import DropdownResources from './elements/DropdownResources.js';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import db from '../firestore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -75,9 +71,25 @@ const useStyles = makeStyles(theme => ({
     }, ButtonStyle: {
         backgroundColor: grey[900],
         color: 'white',
-        marginLeft: 20,
         width: 150,
-        height: 40
+        height: 40,
+        marginTop: 15,
+        float: 'right',
+    },
+    AnswerButton: {
+        backgroundColor: grey[900],
+        color: 'white',
+        width: 150,
+        height: 40,
+        float: 'right',
+    },
+    ButtonStyleAnswer: {
+        backgroundColor: grey[900],
+        color: 'white',
+        width: 150,
+        height: 40,
+        marginLeft: 15,
+        float: 'right', 
     },
 }));
 
@@ -89,17 +101,19 @@ export default function MediaCard() {
     const [open, setOpen] = useState(false);
     const [openAnswer, setOpenAnswer] = useState(false);
     const [questions, setQuestions] = useState([]);
-    const [resource, setResource] = useState('');
+    const [resourceAnswer, setResourceAnswer] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [selectedQuestion, setSelectedQuestion] = useState();
-
+    const [expanded, setExpanded] = useState();
     const handleOpen = () => {
-        var questions = db.collection("questions")
-        questions.onSnapshot((snapShots) => {
-            setQuestions(snapShots.docs.map(doc => {
-                return { id: doc.id, question: doc.data().Question, answer: doc.data().Answer, questionedby: doc.data().QuestionedBy, answeredby: doc.data().answeredBy, time: doc.data().Date.substring(8, 10) + ":" + doc.data().Date.substring(10, 12), date: doc.data().Date.substring(6, 8) + "-" + doc.data().Date.substring(4, 6) + "-" + doc.data().Date.substring(0, 4), ERP: doc.data().ERP }
+        var questionsArray = db.collection("questions")
+        var q = []
+        questionsArray.onSnapshot((snapShots) => {
+            q = (snapShots.docs.map(doc => {
+                return { id: doc.id, question: doc.data().Question, answer: doc.data().Answer, questionedby: doc.data().QuestionedBy, answeredby: doc.data().answeredBy, timeQuest: doc.data().questionedDate.substring(8, 10) + ":" + doc.data().questionedDate.substring(10, 12), questionedDate: doc.data().questionedDate.substring(6, 8) + "-" + doc.data().questionedDate.substring(4, 6) + "-" + doc.data().questionedDate.substring(0, 4), unformattedDateQuest: doc.data().questionedDate.substring(0, 8),timeAns: doc.data().answeredDate.substring(8, 10) + ":" + doc.data().answeredDate.substring(10, 12), answeredDate: doc.data().answeredDate.substring(6, 8) + "-" + doc.data().answeredDate.substring(4, 6) + "-" + doc.data().answeredDate.substring(0, 4), unformattedDateAns: doc.data().answeredDate.substring(0, 8), ERP: doc.data().ERP }
             })
             )
+            setQuestions(q.sort(function (a, b) { return b.unformattedDateQuest - a.unformattedDateQuest }))
         }, error => {
             console.log(error)
         });
@@ -110,26 +124,29 @@ export default function MediaCard() {
         setOpen(false);
     };
 
-    const handleListItemClick = (event, index, question) => {
-        setSelectedIndex(index);
+    const handleListItemClick = (id, question) => (event) => {
+        setSelectedIndex(id);
         setSelectedQuestion(question);
         handleOpenAnswer()
     };
-
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+      };
     const handleOpenAnswer = () => {
+        setResourceAnswer("")
         setOpenAnswer(true);
     };
     const handleCloseAnswer = () => {
         setOpenAnswer(false);
     };
     const selectResource = resource => {
-        setResource(resource)
+        setResourceAnswer(resource)
     }
     const submitNewAnswer = () => {
-        var Resource = resource;
+        var Resource = resourceAnswer;
         var answer = document.getElementById("answer").value;
         if (Resource === "") {
-            alert("Resource is required.")
+            alert("Please select your name.")
         } else {
             if (answer === "") {
                 alert("Answer is required.")
@@ -174,44 +191,38 @@ export default function MediaCard() {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
+                <div className={classes.paper} style={{width: '70%', height: '90%'}}>
                         <div>
                             <h2>Questions and Answers</h2>
                         </div>
-                        <React.Fragment>
-                            <CssBaseline />
-                            <Paper square className={classes.paper} style={{ width: 800, maxHeight: 400, overflow: 'auto' }}>
-                                <List className={classes.list}>
-                                    {questions.map(({ id, question, answer, questionedby, answeredby, ERP }) => (
-                                        <React.Fragment key={id}>
-                                            {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
-                                            {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
-                                            <ListItem button selected={selectedIndex === id} onClick={(event) => handleListItemClick(event, id, question)}>
-                                                <ListItemAvatar>
-                                                    <Avatar alt={questionedby} src={questionedby} />
-                                                </ListItemAvatar>
-                                                <ListItemText
-                                                    primary={
-                                                        <React.Fragment>{ERP} - {question}</React.Fragment>
-                                                    }
-                                                    secondary={
-                                                        <React.Fragment>
-                                                            {answer} <br></br>
-                                                            <br></br>Answered By: {answeredby}
-                                                        </React.Fragment>
-                                                    }
-                                                />
-                                            </ListItem>
-                                        </React.Fragment>
-                                    ))}
-                                </List>
-                            </Paper>
-                            <div className="AddNewButtons">
-                                <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
-                                    Cancel
+
+                            <div className={classes.paper} style={{height: '80%', overflow: 'auto'}}>
+                                {questions.map(({ id, question, answer, questionedby,hasAnwer, answeredby, ERP, unformattedDateQues, unformattedDateAns, questionedDate, answeredDate  }) => 
+                                <Accordion square expanded={expanded === id} onChange={handleChange(id)}>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                    >
+                                        <Typography className={classes.heading} style={{ color: cyan[600], width: '20%', alignItems: 'right' }}>{ERP}</Typography>
+                                        <Typography className={classes.heading} style={{ width: '40%' }}>{question}</Typography>
+                                        <Typography variant="subtitle2" style={{ width: '40%',alignItems: 'left',  }}>{questionedby} - {questionedDate}</Typography>
+                                        
+                                    </AccordionSummary>
+                                    <AccordionDetails >
+                                        <Typography style={{ width: '100%' }}>
+                                            {answer} </Typography>
+                                            <Button variant="contained" onClick={handleListItemClick(id,question)} className={classes.AnswerButton}>
+                                Answer
                                 </Button>
+                                    </AccordionDetails>
+                                    <Typography className={classes.heading} style={{ width: '100%', paddingLeft: 16, color: cyan[600] }}>{answeredby} - {answeredDate}</Typography>
+                                </Accordion>)}
                             </div>
-                        </React.Fragment>
+
+                            <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
+                                Close
+                                </Button>
                     </div>
                 </Fade>
             </Modal>
@@ -242,12 +253,12 @@ export default function MediaCard() {
                             defaultValue=""
                             variant="outlined" className={classes.AnswerLineTexts}
                         />
-                        <div className="AddNewButtons">
-                            <Button variant="contained" onClick={handleCloseAnswer} className={classes.ButtonStyle}>
-                                Cancel
-                            </Button>
-                            <Button variant="contained" onClick={submitNewAnswer} className={classes.ButtonStyle}>
+                        <div>                            
+                            <Button variant="contained" onClick={submitNewAnswer} className={classes.ButtonStyleAnswer}>
                                 Submit
+                            </Button>
+                            <Button variant="contained" onClick={handleCloseAnswer} className={classes.ButtonStyleAnswer}>
+                                Cancel
                             </Button>
                         </div>
                     </div>

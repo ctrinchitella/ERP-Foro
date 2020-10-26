@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -15,6 +15,8 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import db from '../firestore';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,21 +52,42 @@ const useStyles = makeStyles(theme => ({
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
     },
+    ButtonStyle: {
+        backgroundColor: grey[900],
+        color: 'white',
+        width: 150,
+        height: 40,
+        marginTop: 15,
+        float: 'right',
+    },
 }));
 
 export default function MediaCard() {
     const classes = useStyles();
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [issues, setIssues] = useState([]);
+    const [expanded, setExpanded] = useState();
 
     const handleOpen = () => {
+        var issues = db.collection("issues")
+        issues.onSnapshot((snapShots) => {
+            setIssues(snapShots.docs.map(doc => {
+                return { id: doc.id, url: doc.data().FileID, ERP: doc.data().ERP, Title: doc.data().Title, Time: doc.data().Date.substring(8, 10) + ":" + doc.data().Date.substring(10, 12), Date: doc.data().Date.substring(6, 8) + "-" + doc.data().Date.substring(4, 6) + "-" + doc.data().Date.substring(0, 4), Description: doc.data().Description, filename:doc.data().FileName }
+            })
+            )
+        }, error => {
+            console.log(error)
+        });
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
-
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+      };
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <Card className={classes.root} onClick={handleOpen}>
@@ -96,69 +119,32 @@ export default function MediaCard() {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper} style={{width: '50%'}}>
+                <div className={classes.paper} style={{width: '50%', height: '90%'}}>
                         <div>
                             <h2>Issues</h2>
                         </div>
-                        <div className={classes.paper}>
-                            <Accordion>
+                        <div className={classes.paper} style={{height: '80%', overflow: 'auto'}}>
+                        {issues.map(({ id,url,filename, ERP, Title, Description, Time, Date }) => <Accordion square expanded={expanded === id} onChange={handleChange(id)}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-controls="panel1a-content"
-                                    id="panel1a-header"
+                                    id="panel1a-header"                                    
                                 >
-                                    <Typography className={classes.heading} style={{color: cyan[600], width:'15%', alignItems:'right'}}>Netsuite</Typography>
-                                    <Typography className={classes.heading} style={{width: '50%'}}>Cannot see registered tables</Typography>
+                                    <Typography className={classes.heading} style={{color: cyan[600], width:'20%', alignItems:'right'}}>{ERP}</Typography>
+                                    <Typography className={classes.heading} style={{width: '50%'}}>{Title}</Typography>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails >
                                     <Typography style={{width: '100%'}}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                    </Typography>
+                                        {Description} </Typography>
                                 </AccordionDetails>
-                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}>NetsuiteTokens.docx</Typography>
-                            </Accordion>
-                            <Accordion>
-                            <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
-                                    <Typography className={classes.heading} style={{color: cyan[600], width:'15%', alignItems:'right'}}>JDE</Typography>
-                                    <Typography className={classes.heading} style={{width: '50%'}}>Cannot see registered tables</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography style={{width: '100%'}}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                    </Typography>
-                                </AccordionDetails>
-                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}>NetsuiteTokens.docx</Typography>
-                            </Accordion>
-                            <Accordion>
-                            <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
-                                    <Typography className={classes.heading} style={{color: cyan[600], width:'15%', alignItems:'right'}}>Oracle Cloud</Typography>
-                                    <Typography className={classes.heading} style={{width: '50%'}}>Service Calls are failing</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography style={{width: '100%'}}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                    </Typography>
-                                </AccordionDetails>
-                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}>NetsuiteTokens.docx</Typography>
-                            </Accordion>
+                                <Typography className={classes.heading} style={{width: '100%', paddingLeft:16, color: cyan[600]}}><a href={url}>{filename}</a></Typography>
+                            </Accordion> )} 
                         </div>
+                        <div style={{backgroundColor: '#FF0000'}}>
+                                <Button variant="contained" onClick={handleClose} className={classes.ButtonStyle}>
+                                    Close
+                                </Button>
+                            </div>
                     </div>
                 </Fade>
             </Modal>

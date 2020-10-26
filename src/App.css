@@ -197,11 +197,7 @@ p{
 .AddNewButtons {
   display: flex;
   flex-direction: 'row';
-  width: 500px;
-  height: 70px;
-  align-items: right;
-  padding-left: 300px;
-  padding-top: 25px;
+  align-items: right;  
 }
 
 .DocsStyle {
