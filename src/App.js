@@ -51,18 +51,7 @@ function App() {
             </p>
             <img className="NSimg" alt="NS" src={Netsuitelogo}/>
           </div>
-          <div className="NetsuiteButtons">
-            <button className="NSbuttons" size="200" type="button">  How to use NS processes (Basic)</button>
-            <button className="NSbuttons" size="200" type="button">  Postman Configuration and Uses</button>
-          </div>
-          <div className="NetsuiteButtons">
-            <button className="NSbuttons" size="200" type="button">  Default NS Services</button>
-            <button className="NSbuttons" size="200" type="button">  Cloud Inventory Integration</button>
-          </div>
-          <div className="NetsuiteButtons">
-            <button className="NSbuttons" size="200" type="button">  Default NS Services</button>
-            <button className="NSbuttons" size="200" type="button">  Cloud Inventory Integration</button>
-          </div>
+          
         </div>
       <div id="JDEdwards" className="JDEdwards">
         <h1 className="ERPTitle" style={{color: 'white'}}><b>JD Edwards</b></h1>
@@ -73,9 +62,7 @@ function App() {
             </p>
             <img className="NSimg" alt="JDE" src={JDELogo}/>
         </div>
-        <div>
-          <BootButtons/>
-        </div>
+        
       </div>
 
 
